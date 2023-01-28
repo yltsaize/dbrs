@@ -18,3 +18,15 @@ cp-helm-charts:
         configMap:
           name: dbrs-custom-scripts
           defaultMode: 0755
+mysql-src:
+  auth:
+    password: passw0rd
+    rootPassword: passw0rd
+mysql-dst:
+  auth:
+    password: passw0rd
+    rootPassword: passw0rd
+mysql-dwh:
+  auth:
+    password: passw0rd
+    rootPassword: passw0rd

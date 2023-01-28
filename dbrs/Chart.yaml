@@ -7,3 +7,15 @@ dependencies:
   - name: cp-helm-charts
     version: 0.6.1
     repository: file://../helm-charts/cp-helm-charts
+  - name: mysql
+    version: 9.4.8
+    repository: https://charts.bitnami.com/bitnami
+    alias: mysql-src
+  - name: mysql
+    version: 9.4.8
+    repository: https://charts.bitnami.com/bitnami
+    alias: mysql-dst
+  - name: mysql
+    version: 9.4.8
+    repository: https://charts.bitnami.com/bitnami
+    alias: mysql-dwh
