@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dbrs-custom-scripts
+data:
+  # https://github.com/confluentinc/demo-scene/blob/master/kafka-connect-zero-to-hero/docker-compose.yml#L89-L101
+  kafka-connect-init.sh: |-
+    #!/bin/bash
+    echo "Installing Connector"
+    confluent-hub install --no-prompt debezium/debezium-connector-mysql:2.0.1
+    confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:10.6.0

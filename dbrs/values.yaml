@@ -7,3 +7,14 @@ cp-helm-charts:
     enabled: false
   cp-control-center:
     enabled: false
+  cp-kafka-connect:
+    customEnv:
+      CUSTOM_SCRIPT_PATH: /dbrs/custom-scripts/kafka-connect-init.sh
+    volumeMounts:
+      - name: custom-scripts
+        mountPath: /dbrs/custom-scripts
+    volumes:
+      - name: custom-scripts
+        configMap:
+          name: dbrs-custom-scripts
+          defaultMode: 0755
