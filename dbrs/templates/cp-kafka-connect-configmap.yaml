@@ -7,5 +7,5 @@ data:
   kafka-connect-init.sh: |-
     #!/bin/bash
     echo "Installing Connector"
-    confluent-hub install --no-prompt debezium/debezium-connector-mysql:2.0.1
+    confluent-hub install --no-prompt debezium/debezium-connector-mysql:latest
     confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:10.6.0
