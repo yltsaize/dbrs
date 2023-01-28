@@ -20,13 +20,55 @@ cp-helm-charts:
           defaultMode: 0755
 mysql-src:
   auth:
+    database: tpcc
+    username: dbrs
     password: passw0rd
     rootPassword: passw0rd
+  primary:
+    extraVolumeMounts:
+      - name: mysql-ddl
+        mountPath: /dbrs/ddl
+    extraVolumes:
+      - name: mysql-ddl
+        configMap:
+          name: mysql-ddl
+  initdbScrits:
+  init-db.sh: |-
+    !/bin/bash
+    mysql -u root --password=$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /dbrs/ddl/tpcc_ddl.sql
 mysql-dst:
   auth:
+    database: tpcc
+    username: dbrs
     password: passw0rd
     rootPassword: passw0rd
+  primary:
+    extraVolumeMounts:
+      - name: mysql-ddl
+        mountPath: /dbrs/ddl
+    extraVolumes:
+      - name: mysql-ddl
+        configMap:
+          name: mysql-ddl
+  initdbScrits:
+  init-db.sh: |-
+    !/bin/bash
+    mysql -u root --password=$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /dbrs/ddl/tpcc_ddl.sql
 mysql-dwh:
   auth:
+    database: tpcc
+    username: dbrs
     password: passw0rd
     rootPassword: passw0rd
+  primary:
+    extraVolumeMounts:
+      - name: mysql-ddl
+        mountPath: /dbrs/ddl
+    extraVolumes:
+      - name: mysql-ddl
+        configMap:
+          name: mysql-ddl
+  initdbScrits:
+    init-db.sh: |-
+      !/bin/bash
+      mysql -u root --password=$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /dbrs/ddl/tpcc_ddl.sql
