@@ -7,6 +7,9 @@ dependencies:
   - name: cp-helm-charts
     version: 0.6.1
     repository: file://../helm-charts/cp-helm-charts
+  - name: prometheus
+    version: 19.3.3
+    repository: https://prometheus-community.github.io/helm-charts
   - name: mysql
     version: 9.4.8
     repository: https://charts.bitnami.com/bitnami

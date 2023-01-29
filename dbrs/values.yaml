@@ -16,6 +16,15 @@ cp-helm-charts:
         configMap:
           name: dbrs-custom-scripts
           defaultMode: 0755
+prometheus:
+  alertmanager:
+    enabled: false
+  prometheus-pushgateway:
+    enabled: false
+  prometheus-node-exporter:
+    enabled: false
+  kube-state-metrics:
+    enabled: false
 mysql-src:
   auth:
     database: tpcc
