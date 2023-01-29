@@ -6,16 +6,11 @@ cp-helm-charts:
   cp-control-center:
     enabled: false
   cp-kafka-connect:
-    customEnv:
-      CUSTOM_SCRIPT_PATH: /dbrs/custom-scripts/kafka-connect-init.sh
-    volumeMounts:
-      - name: custom-scripts
-        mountPath: /dbrs/custom-scripts
-    volumes:
-      - name: custom-scripts
-        configMap:
-          name: dbrs-custom-scripts
-          defaultMode: 0755
+    image: debezium-connect
+    imageTag: 2.2-1
+    prometheus:
+      jmx:
+        enabled: true
 prometheus:
   alertmanager:
     enabled: false

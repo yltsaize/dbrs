@@ -13,7 +13,7 @@ spec:
       port: {{ .Values.servicePort }}
     {{- if .Values.prometheus.jmx.enabled }}
     - name: metrics
-      port: {{ .Values.prometheus.jmx.port }}
+      port: 9404
     {{- end }}
   selector:
     app: {{ template "cp-kafka-connect.name" . }}
