@@ -9,3 +9,7 @@ data:
     echo "Installing Connector"
     confluent-hub install --no-prompt debezium/debezium-connector-mysql:latest
     confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:10.6.0
+    echo "Download MySQL JDBC driver"
+    wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-8.0.32.tar.gz
+    tar -zxf mysql-connector-j-8.0.32.tar.gz
+    cp mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar /usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc/lib/
