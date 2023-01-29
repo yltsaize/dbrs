@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debezium-ui
+  labels:
+    app: debezium-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debezium-ui
+  template:
+    metadata:
+      labels:
+        app: debezium-ui
+    spec:
+      containers:
+        - name: debezium-ui
+          image: debezium/debezium-ui:2.1.2.Final
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: KAFKA_CONNECT_URIS
+              value: http://dbrs-cp-kafka-connect:8083
