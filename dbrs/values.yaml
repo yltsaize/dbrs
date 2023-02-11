@@ -5,6 +5,10 @@ cp-helm-charts:
     enabled: false
   cp-control-center:
     enabled: false
+  cp-zookeeper:
+    servers: 1
+  cp-kafka:
+    brokers: 1
   cp-kafka-connect:
     image: debezium-connect
     imageTag: 2.2-1
@@ -20,18 +24,14 @@ kafka-ui:
     auth:
       type: disabled
 prometheus:
-  server:
-    global:
-      scrape_interval: 10s
-      scrape_timeout: 5s
   alertmanager:
     enabled: false
   prometheus-pushgateway:
     enabled: false
   prometheus-node-exporter:
-    enabled: false
+    enabled: true
   kube-state-metrics:
-    enabled: false
+    enabled: true
 grafana:
   dashboardsProvider:
     enabled: true
@@ -44,6 +44,8 @@ grafana:
       fileName: debezium-mysql-connector-dashboard.json
     - configMapName: grafana-dashboards
       fileName: kafka_rev1.json
+    - configMapName: grafana-dashboards
+      fileName: kubernetes-monitoring_rev1.json    
 
 mysql-src:
   auth:
