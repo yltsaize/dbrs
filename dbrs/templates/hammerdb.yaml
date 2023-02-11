@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hammerdb
+  labels:
+    app: hammerdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hammerdb
+  template:
+    metadata:
+      labels:
+        app: hammerdb
+    spec:
+      containers:
+        - name: hammerdb
+          image: hammerdb:4.6
+          command: ["bash", "-c", "while true; do sleep 3; done"]

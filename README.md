@@ -6,7 +6,6 @@
 2. [kind](https://kind.sigs.k8s.io/), a k8s cluster inside docker.
 3. [kubefwd](https://github.com/txn2/kubefwd), a CLI for batch `kubectl port-forward`.
 4. [insomnia](https://github.com/Kong/insomnia), a API client for operating dbrs.
-5. [hammerdb](https://www.hammerdb.com/download.html), a benchmarking tool which can generate data to databases.
 
 ## Getting started
 
@@ -19,6 +18,7 @@ First, run up dbrs:
 > cd container-images
 > docker-compose build
 > kind load container-image debezium-connect:2.2-1
+> kind load container-image hammerdb:4.6
 > cd ..
 
 # run dbrs
