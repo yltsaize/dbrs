@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2023-02-10T17:00:14.472Z
+__export_date: 2023-02-11T13:05:18.088Z
 __export_source: insomnia.desktop.app:v2022.7.5
 resources:
   - _id: req_a62970cdf320426e848492dfd5595f43
@@ -340,7 +340,7 @@ resources:
     _type: request
   - _id: req_5bec812bc37b40e6bd5ff59e47817167
     parentId: fld_2147af5491364f1486b1cb469456b920
-    modified: 1676048249797
+    modified: 1676119060926
     created: 1676047697305
     url: http://dbrs-cp-kafka-connect:8083/connectors/
     name: Create - sink-tpcc.stock-dwh
@@ -348,49 +348,27 @@ resources:
     method: POST
     body:
       mimeType: ""
-      text: "{\r
-
-        \    \"name\": \"dbrs-sink-tpcc.stock-dwh\",\r
-
-        \    \"config\": {\r
-
-        \        \"connector.class\":
-        \"io.confluent.connect.jdbc.JdbcSinkConnector\",\r
-
-        \        \"tasks.max\": \"1\",\r
-
-        \        \"key.converter\":
-        \"org.apache.kafka.connect.json.JsonConverter\",\r
-
-        \        \"value.converter\":
-        \"org.apache.kafka.connect.json.JsonConverter\",\r
-
-        \        \"topics\": \"mysql-src.tpcc.stock\",\r
-
-        \        \"connection.url\":
-        \"jdbc:mysql://dbrs-mysql-dwh:3306/tpcc?useSSL=false\",\r
-
-        \        \"connection.user\": \"root\",\r
-
-        \        \"connection.password\": \"passw0rd\",\r
-
-        \        \"table.name.format\": \"stock\",\r
-
-        \        \"insert.mode\": \"upsert\",\r
-
-        \        \"pk.mode\": \"record_key\",\r
-
-        \        \"pk.fields\": \"s_i_id\",\r
-
-        \        \"delete.enabled\": true,\r
-
-        \        \"auto.create\": false,\r
-
-        \        \"auto.evolve\": false\r
-
-        \    }\r
-
-        }"
+      text: >-
+        {
+            "name": "dbrs-sink-tpcc.stock-dwh",
+            "config": {
+                "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+                "tasks.max": "1",
+                "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "topics": "dbrs.src.tpcc.tpcc.stock",
+                "connection.url": "jdbc:mysql://dbrs-mysql-dwh:3306/tpcc?useSSL=false",
+                "connection.user": "root",
+                "connection.password": "passw0rd",
+                "table.name.format": "stock",
+                "insert.mode": "upsert",
+                "pk.mode": "record_key",
+                "pk.fields": "s_i_id",
+                "delete.enabled": true,
+                "auto.create": false,
+                "auto.evolve": false
+            }
+        }
     parameters: []
     headers:
       - name: Content-Type
@@ -474,9 +452,9 @@ resources:
     _type: request
   - _id: req_eaad39b4c79e4fa0977d176a4ff230f4
     parentId: fld_2147af5491364f1486b1cb469456b920
-    modified: 1676048255888
+    modified: 1676117835907
     created: 1676047697302
-    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-sink-tpcc-stock-dwh
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-sink-tpcc.stock-dwh
     name: Delete sink-tpcc.stock-dwh
     description: ""
     method: DELETE
@@ -495,7 +473,7 @@ resources:
     _type: request
   - _id: req_d1289011d6374027b5609fbe894ef5c6
     parentId: fld_e249a882c9b847eba025d63c5e29def8
-    modified: 1676048276412
+    modified: 1676119045572
     created: 1676047697295
     url: http://dbrs-cp-kafka-rest:8082/topics
     name: List topics
