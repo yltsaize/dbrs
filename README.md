@@ -44,11 +44,65 @@ Once everything is up and running, try to see if API works:
 
 dbrs has 3 sets of mysql: `mysql-src` => `mysql-dwh` => `mysql-dst`
 
-1. Run hammerdb to create baseline for 3 databases (details TBD)
-2. In insomnia, run `DBRS/connectors/Create src-src-topic`
-3. Then, run `DBRS/connectors/Create sink-tpcc.stock-dwh`
-4. `kubectl logs -f deployments/dbrs-cp-kafka-connect` to verify no errors for both connectors.
-5. Use hammerdb to generate data to `mysql-src` (details TBD), observe that the same sets of data are replicated to `mysql-dst`
+### Preparing source DB
+
+```bash
+
+> kubectl exec -it deployments/hammerdb -- ./hammerdbcli py auto ./scripts/python/mysql/tprocc/mysql_tprocc_buildschema.py
+
+HammerDB CLI v4.6
+Copyright (C) 2003-2022 Steve Shaw
+Type "help()" for a list of commands
+hammerdb>>>exec(open('./scripts/python/mysql/tprocc/mysql_tprocc_buildschema.py').read())
+SETTING CONFIGURATION
+Database set to MySQL
+Benchmark set to TPC-C for MySQL
+Value dbrs-mysql-src for connection:mysql_host is the same as existing value dbrs-mysql-src, no change made
+Value 3306 for connection:mysql_port is the same as existing value 3306, no change made
+...
+SCHEMA BUILD STARTED
+Script cleared
+Building 1 Warehouses(s) with 1 Virtual User
+Ready to create a 1 Warehouse MySQL TPROC-C schema
+...
+ALL VIRTUAL USERS COMPLETE
+SCHEMA BUILD COMPLETED
+```
+
+In case you want to clear up everything:
+
+```bash
+> kubectl exec -it deployments/hammerdb -- ./hammerdbcli py auto ./scripts/python/mysql/tprocc/mysql_tprocc_deleteschema.py
+```
+
+### Preparing warehouse and destination DB
+
+```bash
+# Dump DDL from src
+> kubectl exec dbrs-mysql-src-0 -- bash -c "mysqldump --no-data -u root --password=passw0rd tpcc > /tmp/tpcc_ddl.sql"
+mysqldump: [Warning] Using a password on the command line interface can be insecure.
+
+# Copy to local
+> kubectl cp dbrs-mysql-src-0:tmp/tpcc_ddl.sql ./tpcc_ddl.sql
+
+# Copy and apply on dwh
+> kubectl cp ./tpcc_ddl.sql dbrs-mysql-dwh-0:tmp/tpcc_ddl.sql
+> kubectl exec dbrs-mysql-dwh-0 -- bash -c "mysqldump -u root --password=passw0rd tpcc < /tmp/tpcc_ddl.sql"
+
+# Copy and apply on dst
+> kubectl cp ./tpcc_ddl.sql dbrs-mysql-dst-0:tmp/tpcc_ddl.sql
+> kubectl exec dbrs-mysql-dst-0 -- bash -c "mysqldump -u root --password=passw0rd tpcc < /tmp/tpcc_ddl.sql"
+```
+
+### Creating dbrs pipelines
+
+1. In insomnia, run `DBRS/connectors/Create src-src-topic`
+2. Then, run `DBRS/connectors/Create sink-tpcc.stock-dwh`
+3. `kubectl logs -f deployments/dbrs-cp-kafka-connect` to verify no errors for both connectors.
+
+### Generating volume
+
+ Use hammerdb to generate data to `mysql-src` (details TBD), observe that the same sets of data are replicated to `mysql-dst`
 
 
 ## Future tasks
