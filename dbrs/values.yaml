@@ -33,20 +33,16 @@ prometheus:
   kube-state-metrics:
     enabled: true
 grafana:
-  dashboardsProvider:
-    enabled: true
   datasources:
-    secretName: grafana-datasources
-  dashboardsConfigMaps:
-    - configMapName: grafana-dashboards
-      fileName: debezium-dashboard.json
-    - configMapName: grafana-dashboards
-      fileName: debezium-mysql-connector-dashboard.json
-    - configMapName: grafana-dashboards
-      fileName: kafka_rev1.json
-    - configMapName: grafana-dashboards
-      fileName: kubernetes-monitoring_rev1.json    
-
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://dbrs-prometheus-server
+  sidecar:
+    dashboards:
+      enabled: true
 mysql-src:
   auth:
     database: tpcc

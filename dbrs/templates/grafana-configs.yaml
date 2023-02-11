@@ -5,13 +5,16 @@ metadata:
 type: Opaque
 data:
   datasources.yaml: {{ $.Files.Get "grafana/datasources.yaml" | b64enc }}
+
+{{ range $path, $bytes := .Files.Glob (printf "grafana/dashboards/**")}}
+{{ $name := base $path }}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-dashboards
+  name: {{ printf "grafana-dashboards-%s" (sha256sum $name | trunc 10) }}
+  labels:
+    grafana_dashboard: "1"
 binaryData:
-{{ range $path, $bytes := .Files.Glob (printf "grafana/dashboards/**")}}
-{{ $name := base $path }}
-{{- printf "%s" $name | indent 2 }}{{ print ": "}}{{ $.Files.Get $path | b64enc }}
+  {{ printf "%s: %s" $name ($.Files.Get $path | b64enc) }}
 {{ end }}
