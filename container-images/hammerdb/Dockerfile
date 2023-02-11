@@ -70,9 +70,6 @@ RUN wget https://github.com/TPC-Council/HammerDB/releases/download/v4.6/HammerDB
     rm -rf *.tar.gz *.zip unixODBC-2.3.9    
 WORKDIR /home/hammerdb/HammerDB-4.6
 
-# Adding some sample scripts to be used with HammerDB command line interface
-ADD scripts /home/hammerdb/HammerDB-4.6/scripts
-
 CMD "bash"
 
 #To create an image: Go to the folder containing the Dockerfile 

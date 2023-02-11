@@ -18,3 +18,13 @@ spec:
         - name: hammerdb
           image: hammerdb:4.6
           command: ["bash", "-c", "while true; do sleep 3; done"]
+          volumeMounts:
+            {{ range $path, $bytes := .Files.Glob ( printf "scripts/**") -}}
+            - name: dbrs-scripts
+              mountPath: {{ printf "/home/hammerdb/HammerDB-4.6/%s" $path | indent 14 }}
+              subPath: {{ sha256sum $path | indent 14 }}
+            {{ end }}
+      volumes:
+        - name: dbrs-scripts
+          configMap:
+            name: dbrs-scripts
