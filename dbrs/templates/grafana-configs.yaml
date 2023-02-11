@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-datasources
+type: Opaque
+data:
+  datasources.yaml: {{ $.Files.Get "grafana/datasources.yaml" | b64enc }}

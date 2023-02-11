@@ -28,6 +28,11 @@ prometheus:
     enabled: false
   kube-state-metrics:
     enabled: false
+grafana:
+  dashboardsProvider:
+    enabled: true
+  datasources:
+    secretName: grafana-datasources
 mysql-src:
   auth:
     database: tpcc
