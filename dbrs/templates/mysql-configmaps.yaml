@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mysql-ddl
-data:
-  tpcc_ddl.sql: |-
-{{ .Files.Get "sql/tpcc_ddl.sql" | indent 4}}
