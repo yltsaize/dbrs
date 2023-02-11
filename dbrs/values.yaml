@@ -33,6 +33,11 @@ grafana:
     enabled: true
   datasources:
     secretName: grafana-datasources
+  dashboardsConfigMaps:
+    - configMapName: grafana-dashboards
+      fileName: debezium-dashboard.json
+    - configMapName: grafana-dashboards
+      fileName: debezium-mysql-connector-dashboard.json
 mysql-src:
   auth:
     database: tpcc
