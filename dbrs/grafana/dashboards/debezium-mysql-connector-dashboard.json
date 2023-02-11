@@ -76,7 +76,7 @@
   "panels": [
     {
       "collapsed": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -90,7 +90,7 @@
     },
     {
       "content": "\n# Debezium MySQL Connector Metrics\n\nThe Debezium MySQL connector has three metric types in addition to the built-in support for JMX metrics that Zookeeper, Kafka, and Kafka Connect have.\n\n* snapshot metrics\n\n* binlog metrics\n\n* schema history metrics\n\nFor more detailed informarion about the metrics please visit the Debezium documentation page\n\n[Click here to visit](https://debezium.io/documentation/reference/1.0/assemblies/cdc-mysql-connector/as_deploy-the-mysql-connector.html#mysql-connector-binlog-metrics)\n\n\n\n",
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -115,7 +115,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -170,7 +170,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_Connected{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_Connected{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -203,7 +203,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -258,7 +258,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_BinlogPosition{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_BinlogPosition{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -286,7 +286,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#8F3BB8"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -341,7 +341,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_IsGtidModeEnabled{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_IsGtidModeEnabled{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -374,7 +374,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -429,7 +429,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_NumberOfCommittedTransactions{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_NumberOfCommittedTransactions{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -457,7 +457,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -512,7 +512,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_NumberOfRolledBackTransactions{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_NumberOfRolledBackTransactions{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -540,7 +540,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -595,7 +595,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_NumberOfNotWellFormedTransactions{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\r",
+          "expr": "debezium_metrics_NumberOfNotWellFormedTransactions{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\r",
           "refId": "A"
         }
       ],
@@ -623,7 +623,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -678,7 +678,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_TotalNumberOfEventsSeen{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_TotalNumberOfEventsSeen{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -698,7 +698,7 @@
       "valueName": "avg"
     },
     {
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 4,
         "w": 4,
@@ -740,7 +740,7 @@
       "pluginVersion": "6.5.2",
       "targets": [
         {
-          "expr": "debezium_metrics_NumberOfSkippedEvents{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_NumberOfSkippedEvents{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -758,7 +758,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -813,7 +813,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_NumberOfEventsFiltered{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_NumberOfEventsFiltered{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -834,14 +834,14 @@
     },
     {
       "aliasColors": {
-        "debezium_metrics_SecondsSinceLastEvent{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
-        "debezium_metrics_SecondsSinceLastEvent{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "dark-purple",
-        "debezium_metrics_SecondsSinceLastEvent{context=\"binlog\",instance=\"192.168.13.124:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-purple"
+        "debezium_metrics_SecondsSinceLastEvent{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
+        "debezium_metrics_SecondsSinceLastEvent{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "dark-purple",
+        "debezium_metrics_SecondsSinceLastEvent{context=\"binlog\",instance=\"192.168.13.124:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-purple"
       },
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -880,7 +880,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "debezium_metrics_SecondsSinceLastEvent{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_SecondsSinceLastEvent{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -934,7 +934,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -989,7 +989,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_QueueTotalCapacity{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_QueueTotalCapacity{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -1017,7 +1017,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -1073,7 +1073,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_QueueRemainingCapacity{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_QueueRemainingCapacity{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -1094,15 +1094,15 @@
     },
     {
       "aliasColors": {
-        "debezium_metrics_SecondsBehindMaster{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-blue",
-        "debezium_metrics_SecondsBehindMaster{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
-        "debezium_metrics_SecondsBehindMaster{context=\"binlog\",instance=\"192.168.13.124:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-blue"
+        "debezium_metrics_SecondsBehindMaster{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-blue",
+        "debezium_metrics_SecondsBehindMaster{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
+        "debezium_metrics_SecondsBehindMaster{context=\"binlog\",instance=\"192.168.13.124:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-blue"
       },
       "bars": false,
       "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1140,7 +1140,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "debezium_metrics_SecondsBehindMaster{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}",
+          "expr": "debezium_metrics_SecondsBehindMaster{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}",
           "refId": "A"
         }
       ],
@@ -1187,14 +1187,14 @@
     },
     {
       "aliasColors": {
-        "debezium_metrics_MilliSecondsBehindSource{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
-        "debezium_metrics_MilliSecondsBehindSource{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "semi-dark-blue",
-        "debezium_metrics_MilliSecondsBehindSource{context=\"binlog\",instance=\"192.168.13.124:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-purple"
+        "debezium_metrics_MilliSecondsBehindSource{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
+        "debezium_metrics_MilliSecondsBehindSource{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "semi-dark-blue",
+        "debezium_metrics_MilliSecondsBehindSource{context=\"binlog\",instance=\"192.168.13.124:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-purple"
       },
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1230,7 +1230,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "debezium_metrics_MilliSecondsBehindSource{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_MilliSecondsBehindSource{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -1277,14 +1277,14 @@
     },
     {
       "aliasColors": {
-        "debezium_metrics_NumberOfDisconnects{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-orange",
-        "debezium_metrics_NumberOfDisconnects{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "semi-dark-blue",
-        "debezium_metrics_NumberOfDisconnects{context=\"binlog\",instance=\"192.168.13.124:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-purple"
+        "debezium_metrics_NumberOfDisconnects{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-orange",
+        "debezium_metrics_NumberOfDisconnects{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "semi-dark-blue",
+        "debezium_metrics_NumberOfDisconnects{context=\"binlog\",instance=\"192.168.13.124:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-purple"
       },
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1320,7 +1320,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "debezium_metrics_NumberOfDisconnects{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_NumberOfDisconnects{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -1367,14 +1367,14 @@
     },
     {
       "aliasColors": {
-        "debezium_metrics_NumberOfLargeTransactions{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
-        "debezium_metrics_NumberOfLargeTransactions{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
-        "debezium_metrics_NumberOfLargeTransactions{context=\"binlog\",instance=\"192.168.13.124:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-blue"
+        "debezium_metrics_NumberOfLargeTransactions{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
+        "debezium_metrics_NumberOfLargeTransactions{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
+        "debezium_metrics_NumberOfLargeTransactions{context=\"binlog\",instance=\"192.168.13.124:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-blue"
       },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1410,7 +1410,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "debezium_metrics_NumberOfLargeTransactions{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_NumberOfLargeTransactions{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -1457,7 +1457,7 @@
     },
     {
       "collapsed": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1479,7 +1479,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -1534,7 +1534,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_TotalTableCount{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}",
+          "expr": "debezium_metrics_TotalTableCount{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}",
           "refId": "A"
         }
       ],
@@ -1555,7 +1555,7 @@
     },
     {
       "cacheTimeout": null,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 4,
         "w": 4,
@@ -1608,7 +1608,7 @@
       "pluginVersion": "6.5.2",
       "targets": [
         {
-          "expr": "debezium_metrics_RemainingTableCount{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}",
+          "expr": "debezium_metrics_RemainingTableCount{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}",
           "refId": "A"
         }
       ],
@@ -1626,7 +1626,7 @@
         "#3274D9",
         "#299c46"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -1681,7 +1681,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_HoldingGlobalLock{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}",
+          "expr": "debezium_metrics_HoldingGlobalLock{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}",
           "refId": "A"
         }
       ],
@@ -1714,7 +1714,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -1770,7 +1770,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_SnapshotRunning{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}",
+          "expr": "debezium_metrics_SnapshotRunning{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}",
           "refId": "A"
         }
       ],
@@ -1803,7 +1803,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#299c46"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -1858,7 +1858,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_SnapshotAborted{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_SnapshotAborted{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -1891,7 +1891,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -1946,7 +1946,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_SnapshotCompleted{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}",
+          "expr": "debezium_metrics_SnapshotCompleted{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}",
           "refId": "A"
         }
       ],
@@ -1972,7 +1972,7 @@
     },
     {
       "cacheTimeout": null,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 4,
         "w": 12,
@@ -2015,7 +2015,7 @@
       "pluginVersion": "6.5.2",
       "targets": [
         {
-          "expr": "debezium_metrics_SnapshotDurationInSeconds{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_SnapshotDurationInSeconds{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -2026,14 +2026,14 @@
     },
     {
       "aliasColors": {
-        "debezium_metrics_NumberOfEventsFiltered{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-blue",
-        "debezium_metrics_NumberOfEventsFiltered{context=\"binlog\",instance=\"192.168.13.124:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-purple",
-        "debezium_metrics_NumberOfEventsFiltered{context=\"snapshot\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "dark-blue"
+        "debezium_metrics_NumberOfEventsFiltered{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-blue",
+        "debezium_metrics_NumberOfEventsFiltered{context=\"binlog\",instance=\"192.168.13.124:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-purple",
+        "debezium_metrics_NumberOfEventsFiltered{context=\"snapshot\",instance=\"192.168.11.182:7071\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "dark-blue"
       },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -2069,7 +2069,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "debezium_metrics_NumberOfEventsFiltered{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_NumberOfEventsFiltered{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -2123,7 +2123,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "ms",
       "gauge": {
         "maxValue": 100,
@@ -2178,7 +2178,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_MilliSecondsSinceLastEvent{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\r",
+          "expr": "debezium_metrics_MilliSecondsSinceLastEvent{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\r",
           "refId": "A"
         }
       ],
@@ -2206,7 +2206,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -2261,7 +2261,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_QueueTotalCapacity{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_QueueTotalCapacity{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -2281,7 +2281,7 @@
       "valueName": "avg"
     },
     {
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 4,
         "w": 4,
@@ -2323,7 +2323,7 @@
       "pluginVersion": "6.5.2",
       "targets": [
         {
-          "expr": "debezium_metrics_QueueRemainingCapacity{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_QueueRemainingCapacity{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -2334,14 +2334,14 @@
     },
     {
       "aliasColors": {
-        "debezium_metrics_NumberOfErroneousEvents{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-orange",
-        "debezium_metrics_NumberOfErroneousEvents{context=\"binlog\",instance=\"192.168.13.124:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-blue",
-        "debezium_metrics_NumberOfErroneousEvents{context=\"snapshot\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "semi-dark-purple"
+        "debezium_metrics_NumberOfErroneousEvents{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-orange",
+        "debezium_metrics_NumberOfErroneousEvents{context=\"binlog\",instance=\"192.168.13.124:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-blue",
+        "debezium_metrics_NumberOfErroneousEvents{context=\"snapshot\",instance=\"192.168.11.182:7071\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "semi-dark-purple"
       },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -2377,7 +2377,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "debezium_metrics_NumberOfErroneousEvents{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\r",
+          "expr": "debezium_metrics_NumberOfErroneousEvents{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\r",
           "refId": "A"
         }
       ],
@@ -2424,14 +2424,14 @@
     },
     {
       "aliasColors": {
-        "debezium_metrics_TotalNumberOfEventsSeen{context=\"binlog\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
-        "debezium_metrics_TotalNumberOfEventsSeen{context=\"binlog\",instance=\"192.168.13.124:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
-        "debezium_metrics_TotalNumberOfEventsSeen{context=\"snapshot\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "semi-dark-blue"
+        "debezium_metrics_TotalNumberOfEventsSeen{context=\"binlog\",instance=\"192.168.11.182:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
+        "debezium_metrics_TotalNumberOfEventsSeen{context=\"binlog\",instance=\"192.168.13.124:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "semi-dark-purple",
+        "debezium_metrics_TotalNumberOfEventsSeen{context=\"snapshot\",instance=\"192.168.11.182:7071\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "semi-dark-blue"
       },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -2467,7 +2467,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "debezium_metrics_TotalNumberOfEventsSeen{context=\"$context\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_TotalNumberOfEventsSeen{context=\"$context\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -2514,7 +2514,7 @@
     },
     {
       "collapsed": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2528,7 +2528,7 @@
     },
     {
       "content": "\n# Schema Changes Metrics\n\nFor detailed explanation for all the schema changes metrics: [Visit Debezium documentation](https://debezium.io/documentation/reference/1.0/assemblies/cdc-mysql-connector/as_deploy-the-mysql-connector.html#mysql-connector-schema-history-metrics)\n\n\n\n\n",
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "gridPos": {
         "h": 5,
         "w": 12,
@@ -2553,7 +2553,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "decimals": null,
       "format": "none",
       "gauge": {
@@ -2609,7 +2609,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_RecoveryStartTime{context=\"schema-history\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}",
+          "expr": "debezium_metrics_RecoveryStartTime{context=\"schema-history\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}",
           "format": "time_series",
           "instant": false,
           "legendFormat": "",
@@ -2640,7 +2640,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "ms",
       "gauge": {
         "maxValue": 100,
@@ -2695,7 +2695,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_MilliSecondsSinceLastAppliedChange{context=\"schema-history\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_MilliSecondsSinceLastAppliedChange{context=\"schema-history\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -2723,7 +2723,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "format": "ms",
       "gauge": {
         "maxValue": 100,
@@ -2778,7 +2778,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "debezium_metrics_MilliSecondsSinceLastRecoveredChange{context=\"schema-history\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_MilliSecondsSinceLastRecoveredChange{context=\"schema-history\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -2799,13 +2799,13 @@
     },
     {
       "aliasColors": {
-        "debezium_metrics_ChangesRecovered{context=\"schema-history\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "dark-blue",
-        "debezium_metrics_ChangesRecovered{context=\"schema-history\",instance=\"192.168.13.124:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-purple"
+        "debezium_metrics_ChangesRecovered{context=\"schema-history\",instance=\"192.168.11.182:7071\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "dark-blue",
+        "debezium_metrics_ChangesRecovered{context=\"schema-history\",instance=\"192.168.13.124:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-purple"
       },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -2841,7 +2841,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "debezium_metrics_ChangesRecovered{context=\"schema-history\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_ChangesRecovered{context=\"schema-history\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -2888,13 +2888,13 @@
     },
     {
       "aliasColors": {
-        "debezium_metrics_ChangesApplied{context=\"schema-history\",instance=\"192.168.11.182:7071\",job=\"debezium\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "dark-purple",
-        "debezium_metrics_ChangesApplied{context=\"schema-history\",instance=\"192.168.13.124:7071\",job=\"debezium\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-blue"
+        "debezium_metrics_ChangesApplied{context=\"schema-history\",instance=\"192.168.11.182:7071\",name=\"snapshot-prod-aurora-cluster-cluster\",plugin=\"mysql\"}": "dark-purple",
+        "debezium_metrics_ChangesApplied{context=\"schema-history\",instance=\"192.168.13.124:7071\",name=\"prod-aurora-cluster\",plugin=\"mysql\"}": "dark-blue"
       },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
+      "datasource": "Prometheus",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -2930,7 +2930,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "debezium_metrics_ChangesApplied{context=\"schema-history\",instance=\"$instance\",job=\"debezium\",name=\"$name\",plugin=\"$plugin\"}\t\r",
+          "expr": "debezium_metrics_ChangesApplied{context=\"schema-history\",instance=\"$instance\",name=\"$name\",plugin=\"$plugin\"}\t\r",
           "refId": "A"
         }
       ],
@@ -2988,10 +2988,10 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "Prometheus",
         "definition": "debezium_metrics_BinlogPosition",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "MySQL Node",
         "multi": false,
         "name": "name",
@@ -3010,7 +3010,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "Prometheus",
         "definition": "debezium_metrics_BinlogPosition",
         "hide": 0,
         "includeAll": false,
@@ -3032,7 +3032,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "Prometheus",
         "definition": "debezium_metrics_MilliSecondsSinceLastEvent",
         "hide": 0,
         "includeAll": false,
@@ -3054,7 +3054,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "Prometheus",
         "definition": "debezium_metrics_BinlogPosition",
         "hide": 0,
         "includeAll": false,
