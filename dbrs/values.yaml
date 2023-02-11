@@ -11,6 +11,14 @@ cp-helm-charts:
     prometheus:
       jmx:
         enabled: true
+kafka-ui:
+  yamlApplicationConfig:
+    kafka:
+      clusters:
+        - name: dbrs
+          bootstrapServers: dbrs-cp-kafka:9092
+    auth:
+      type: disabled
 prometheus:
   alertmanager:
     enabled: false
