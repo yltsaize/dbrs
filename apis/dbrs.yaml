@@ -1,0 +1,558 @@
+_type: export
+__export_format: 4
+__export_date: 2023-02-10T17:00:14.472Z
+__export_source: insomnia.desktop.app:v2022.7.5
+resources:
+  - _id: req_a62970cdf320426e848492dfd5595f43
+    parentId: fld_9cce845d3739420faa70c95d5407a362
+    modified: 1676048191979
+    created: 1676047697320
+    url: http://dbrs-cp-kafka-connect:8083/connector-plugins
+    name: List connector-plugins
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697320
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_9cce845d3739420faa70c95d5407a362
+    parentId: fld_fb5c55d7b00147979514afd636e20368
+    modified: 1676047697322
+    created: 1676047697322
+    name: cluster
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1676047697322
+    _type: request_group
+  - _id: fld_fb5c55d7b00147979514afd636e20368
+    parentId: wrk_8ace79d88cce4aaeb5c18d5b2b5616ab
+    modified: 1676047697324
+    created: 1676047697324
+    name: DBRS
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1676047697324
+    _type: request_group
+  - _id: wrk_8ace79d88cce4aaeb5c18d5b2b5616ab
+    parentId: null
+    modified: 1676048382850
+    created: 1676047583976
+    name: New Document
+    description: Manages DBRS connectors, topics etc.
+    scope: design
+    _type: workspace
+  - _id: req_4052585c657246f48e6eaf5e40251bfb
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1676048228187
+    created: 1676047697317
+    url: http://dbrs-cp-kafka-connect:8083/connectors
+    name: List connectors
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697317
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_2147af5491364f1486b1cb469456b920
+    parentId: fld_fb5c55d7b00147979514afd636e20368
+    modified: 1676047697318
+    created: 1676047697318
+    name: connectors
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1676047697318
+    _type: request_group
+  - _id: req_7fec5a3bf4d3450c87a59decd4fcf449
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1676048232699
+    created: 1676047697315
+    url: http://dbrs-cp-kafka-connect:8083/connector-plugins/io.debezium.connector.mysql.MySqlConnector/config/validate
+    name: Validate config
+    description: ""
+    method: PUT
+    body:
+      mimeType: ""
+      text: "    {\r
+
+        \        \"name\": \"hello\",\r
+
+        \        \"connector.class\":
+        \"io.debezium.connector.mysql.MySqlConnector\",\r
+
+        \        \"tasks.max\": \"1\",\r
+
+        \        \"topic.prefix\": \"dbrs.src.tpcc\",\r
+
+        \        \"database.hostname\": \"dbrs-mysql-src\",\r
+
+        \        \"database.port\": \"3306\",\r
+
+        \        \"database.user\": \"root\",\r
+
+        \        \"database.password\": \"passw0rd\",\r
+
+        \        \"database.server.id\": \"10000\",\r
+
+        \        \"database.server.name\": \"mysql-src\",\r
+
+        \        \"database.include.list\": \"tpcc\",\r
+
+        \        \"database.history.kafka.bootstrap.servers\":
+        \"dbrs-cp-kafka:9092\",\r
+
+        \        \"database.history.kafka.topic\":
+        \"dbrs.history.src.tpcc\",\r
+
+        \        \"include.schema.changes\": \"false\",\r
+
+        \        \"transforms\": \"unwrap\",\r
+
+        \        \"transforms.unwrap.type\":
+        \"io.debezium.transforms.ExtractNewRecordState\",\r
+
+        \        \"transforms.unwrap.drop.tombstones=\": \"false\"\r
+
+        \    }"
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1676047697315
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3d49dbc249e44a2c83f95e643132279f
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1676048238347
+    created: 1676047697313
+    url: http://dbrs-cp-kafka-connect:8083/connectors
+    name: Create src-src-tpcc
+    description: ""
+    method: POST
+    body:
+      mimeType: ""
+      text: "{\r
+
+        \    \"name\": \"dbrs-src-src-tpcc\",\r
+
+        \    \"config\": {\r
+
+        \        \"connector.class\":
+        \"io.debezium.connector.mysql.MySqlConnector\",\r
+
+        \        \"tasks.max\": \"1\",\r
+
+        \        \"key.converter\":
+        \"org.apache.kafka.connect.json.JsonConverter\",\r
+
+        \        \"value.converter\":
+        \"org.apache.kafka.connect.json.JsonConverter\",\r
+
+        \        \"topic.prefix\": \"dbrs.src.tpcc\",\r
+
+        \        \"database.hostname\": \"dbrs-mysql-src\",\r
+
+        \        \"database.port\": \"3306\",\r
+
+        \        \"database.user\": \"root\",\r
+
+        \        \"database.password\": \"passw0rd\",\r
+
+        \        \"database.server.id\": \"10000\",\r
+
+        \        \"database.server.name\": \"mysql-src\",\r
+
+        \        \"database.include.list\": \"tpcc\",\r
+
+        \        \"schema.history.internal.kafka.bootstrap.servers\":
+        \"dbrs-cp-kafka:9092\",\r
+
+        \        \"schema.history.internal.kafka.topic\":
+        \"dbrs.history.src.tpcc\",\r
+
+        \        \"include.schema.changes\": \"false\",\r
+
+        \        \"transforms\": \"unwrap\",\r
+
+        \        \"transforms.unwrap.type\":
+        \"io.debezium.transforms.ExtractNewRecordState\",\r
+
+        \        \"transforms.unwrap.drop.tombstones=\": \"false\",\r
+
+        \        \"name\": \"dbrs-src-src-tpcc\"\r
+
+        \    }\r
+
+        }"
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1676047697313
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1174ef4958a94bfc9c8d113e31002b3c
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1676048241276
+    created: 1676047697311
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-src-src-tpcc
+    name: Read src-src-tpcc
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697311
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3d78fc3020154edf8c06d9994286c677
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1676048243791
+    created: 1676047697309
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-src-src-tpcc/config
+    name: Update src-src-tpcc
+    description: ""
+    method: PUT
+    body:
+      mimeType: ""
+      text: "    {\r
+
+        \        \"connector.class\":
+        \"io.debezium.connector.mysql.MySqlConnector\",\r
+
+        \        \"tasks.max\": \"1\",\r
+
+        \        \"key.converter\":
+        \"org.apache.kafka.connect.json.JsonConverter\",\r
+
+        \        \"value.converter\":
+        \"org.apache.kafka.connect.json.JsonConverter\",\r
+
+        \        \"topic.prefix\": \"dbrs.src.tpcc\",\r
+
+        \        \"database.hostname\": \"dbrs-mysql-src\",\r
+
+        \        \"database.port\": \"3306\",\r
+
+        \        \"database.user\": \"root\",\r
+
+        \        \"database.password\": \"passw0rd\",\r
+
+        \        \"database.server.id\": \"10000\",\r
+
+        \        \"database.server.name\": \"mysql-src\",\r
+
+        \        \"database.include.list\": \"tpcc\",\r
+
+        \        \"schema.history.internal.kafka.bootstrap.servers\":
+        \"dbrs-cp-kafka:9092\",\r
+
+        \        \"schema.history.internal.kafka.topic\":
+        \"dbrs.history.src.tpcc\",\r
+
+        \        \"include.schema.changes\": \"false\",\r
+
+        \        \"transforms\": \"unwrap\",\r
+
+        \        \"transforms.unwrap.type\":
+        \"io.debezium.transforms.ExtractNewRecordState\",\r
+
+        \        \"transforms.unwrap.drop.tombstones=\": \"false\",\r
+
+        \        \"name\": \"dbrs-src-src-tpcc\"\r
+
+        \    }"
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1676047697309
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_241fc8f6da4a408b92f957702a7c0a50
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1676048246581
+    created: 1676047697307
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-src-src-tpcc
+    name: Delete src-src-tpcc
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697307
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5bec812bc37b40e6bd5ff59e47817167
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1676048249797
+    created: 1676047697305
+    url: http://dbrs-cp-kafka-connect:8083/connectors/
+    name: Create - sink-tpcc.stock-dwh
+    description: ""
+    method: POST
+    body:
+      mimeType: ""
+      text: "{\r
+
+        \    \"name\": \"dbrs-sink-tpcc.stock-dwh\",\r
+
+        \    \"config\": {\r
+
+        \        \"connector.class\":
+        \"io.confluent.connect.jdbc.JdbcSinkConnector\",\r
+
+        \        \"tasks.max\": \"1\",\r
+
+        \        \"key.converter\":
+        \"org.apache.kafka.connect.json.JsonConverter\",\r
+
+        \        \"value.converter\":
+        \"org.apache.kafka.connect.json.JsonConverter\",\r
+
+        \        \"topics\": \"mysql-src.tpcc.stock\",\r
+
+        \        \"connection.url\":
+        \"jdbc:mysql://dbrs-mysql-dwh:3306/tpcc?useSSL=false\",\r
+
+        \        \"connection.user\": \"root\",\r
+
+        \        \"connection.password\": \"passw0rd\",\r
+
+        \        \"table.name.format\": \"stock\",\r
+
+        \        \"insert.mode\": \"upsert\",\r
+
+        \        \"pk.mode\": \"record_key\",\r
+
+        \        \"pk.fields\": \"s_i_id\",\r
+
+        \        \"delete.enabled\": true,\r
+
+        \        \"auto.create\": false,\r
+
+        \        \"auto.evolve\": false\r
+
+        \    }\r
+
+        }"
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1676047697305
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2afc366de4a24cbcb111b931656814f3
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1676048252949
+    created: 1676047697303
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-sink-tpcc.stock-dwh
+    name: Read sink-tpcc.stock-dwh
+    description: ""
+    method: GET
+    body:
+      mimeType: ""
+      text: "{\r
+
+        \    \"name\": \"dbrs-sink-tpcc.stock-dwh\",\r
+
+        \    \"config\": {\r
+
+        \        \"connector.class\":
+        \"io.confluent.connect.jdbc.JdbcSinkConnector\",\r
+
+        \        \"tasks.max\": \"1\",\r
+
+        \        \"key.converter\":
+        \"org.apache.kafka.connect.json.JsonConverter\",\r
+
+        \        \"value.converter\":
+        \"org.apache.kafka.connect.json.JsonConverter\",\r
+
+        \        \"topics\": \"mysql-src.tpcc.stock\",\r
+
+        \        \"connection.url\":
+        \"jdbc:mysql://dbrs-mysql-dwh:3306/tpcc?useSSL=false\",\r
+
+        \        \"connection.user\": \"root\",\r
+
+        \        \"connection.password\": \"passw0rd\",\r
+
+        \        \"table.name.format\": \"stock\",\r
+
+        \        \"insert.mode\": \"upsert\",\r
+
+        \        \"pk.mode\": \"record_key\",\r
+
+        \        \"pk.fields\": \"s_i_id\",\r
+
+        \        \"delete.enabled\": true,\r
+
+        \        \"auto.create\": false,\r
+
+        \        \"auto.evolve\": false\r
+
+        \    }\r
+
+        }"
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1676047697303
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_eaad39b4c79e4fa0977d176a4ff230f4
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1676048255888
+    created: 1676047697302
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-sink-tpcc-stock-dwh
+    name: Delete sink-tpcc.stock-dwh
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697302
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d1289011d6374027b5609fbe894ef5c6
+    parentId: fld_e249a882c9b847eba025d63c5e29def8
+    modified: 1676048276412
+    created: 1676047697295
+    url: http://dbrs-cp-kafka-rest:8082/topics
+    name: List topics
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697295
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_e249a882c9b847eba025d63c5e29def8
+    parentId: fld_fb5c55d7b00147979514afd636e20368
+    modified: 1676047697299
+    created: 1676047697299
+    name: kafka
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1676047697299
+    _type: request_group
+  - _id: env_4d63cbcf3872889623ab3241b62fb3a353303e26
+    parentId: wrk_8ace79d88cce4aaeb5c18d5b2b5616ab
+    modified: 1676047583981
+    created: 1676047583981
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1676047583981
+    _type: environment
+  - _id: jar_4d63cbcf3872889623ab3241b62fb3a353303e26
+    parentId: wrk_8ace79d88cce4aaeb5c18d5b2b5616ab
+    modified: 1676047583983
+    created: 1676047583983
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_085f81935ced44b3b2afa392438f2bf3
+    parentId: wrk_8ace79d88cce4aaeb5c18d5b2b5616ab
+    modified: 1676048366386
+    created: 1676047583977
+    fileName: DBRS
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: uts_2c8297826fdc4eb2acfe2cf7cc5b2f13
+    parentId: wrk_8ace79d88cce4aaeb5c18d5b2b5616ab
+    modified: 1676047583991
+    created: 1676047583991
+    name: Example Test Suite
+    _type: unit_test_suite
