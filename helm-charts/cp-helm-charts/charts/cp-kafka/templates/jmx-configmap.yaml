@@ -15,3 +15,5 @@ data:
     lowercaseOutputLabelNames: true
     ssl: false
     rules:
+    - pattern: ".*"
+{{ end }}
