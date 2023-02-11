@@ -1,7 +1,7 @@
 version: '2'
 services:
   debezium-connect:
-    image: debezium-connect:2.2-1
+    image: debezium-connect:2.2-2
     build:
       context: debezium-connect
       args:
