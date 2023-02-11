@@ -38,7 +38,26 @@ Once everything is up and running, try to see if API works:
 
 1. Launch insomnia client
 2. Import `apis/dbrs.yaml`
-3. Run `DBRS/cluster/List connector-plugins`.
+3. Run `DBRS/cluster/List connector-plugins`, should see:
+
+```json
+[
+	{
+		"class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+		"type": "sink",
+		"version": "10.6.0"
+	},
+    ...
+	{
+		"class": "io.debezium.connector.mysql.MySqlConnector",
+		"type": "source",
+		"version": "2.2.0.Alpha1"
+	},
+    ...
+]
+```
+
+4. Run `DBRs/connectors/List connectors`, should see an empty list `[]`.
 
 ## Demo Scenario
 
@@ -87,18 +106,47 @@ mysqldump: [Warning] Using a password on the command line interface can be insec
 
 # Copy and apply on dwh
 > kubectl cp ./tpcc_ddl.sql dbrs-mysql-dwh-0:tmp/tpcc_ddl.sql
-> kubectl exec dbrs-mysql-dwh-0 -- bash -c "mysqldump -u root --password=passw0rd tpcc < /tmp/tpcc_ddl.sql"
+> kubectl exec dbrs-mysql-dwh-0 -- bash -c "mysql -u root --password=passw0rd tpcc < /tmp/tpcc_ddl.sql"
 
 # Copy and apply on dst
 > kubectl cp ./tpcc_ddl.sql dbrs-mysql-dst-0:tmp/tpcc_ddl.sql
-> kubectl exec dbrs-mysql-dst-0 -- bash -c "mysqldump -u root --password=passw0rd tpcc < /tmp/tpcc_ddl.sql"
+> kubectl exec dbrs-mysql-dst-0 -- bash -c "mysql -u root --password=passw0rd tpcc < /tmp/tpcc_ddl.sql"
 ```
 
 ### Creating dbrs pipelines
 
-1. In insomnia, run `DBRS/connectors/Create src-src-topic`
-2. Then, run `DBRS/connectors/Create sink-tpcc.stock-dwh`
-3. `kubectl logs -f deployments/dbrs-cp-kafka-connect` to verify no errors for both connectors.
+1. Check kafka-connect logs:
+
+```bash
+> kubectl logs -f deployments/dbrs-cp-kafka-connect
+```
+
+2. In insomnia, run `DBRS/connectors/Create src-src-topic` to create the src to dwh connector. Observe kafka-connect logs to verify if any error.
+
+
+3. Run `DBRS/kafka/List topics` and notice per-table topics are being created:
+
+```json
+[
+	"dbrs.src.tpcc.tpcc.orders",
+	"dbrs.src.tpcc.tpcc.history",
+	"dbrs-cp-kafka-connect-offset",
+	"dbrs.src.tpcc.tpcc.warehouse",
+	"dbrs.src.tpcc.tpcc.item",
+	"dbrs.history.src.tpcc",
+	"dbrs.src.tpcc.tpcc.order_line",
+	"dbrs.src.tpcc.tpcc.customer",
+	"dbrs-cp-kafka-connect-status",
+	"dbrs-cp-kafka-connect-config",
+	"dbrs.src.tpcc.tpcc.district",
+	"_confluent-metrics",
+	"dbrs.src.tpcc.tpcc.stock",
+	"dbrs.src.tpcc.tpcc.new_order"
+]
+```
+
+4. Then, run `DBRS/connectors/Create sink-tpcc.stock-dwh` to create dwh to dst connector. Observe kafka-connect logs to verify if any error.
+
 
 ### Generating volume
 
