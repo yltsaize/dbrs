@@ -24,3 +24,17 @@ spec:
           env:
             - name: KAFKA_CONNECT_URIS
               value: http://dbrs-cp-kafka-connect:8083
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: debezium-ui
+spec:
+  ports:
+  - name: debezium-ui
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: debezium-ui
+  type: ClusterIP
