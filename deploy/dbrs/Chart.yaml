@@ -16,15 +16,3 @@ dependencies:
   - name: grafana
     version: 6.50.7
     repository: https://grafana.github.io/helm-charts
-  - name: mysql
-    version: 9.4.8
-    repository: https://charts.bitnami.com/bitnami
-    alias: mysql-src
-  - name: mysql
-    version: 9.4.8
-    repository: https://charts.bitnami.com/bitnami
-    alias: mysql-dst
-  - name: mysql
-    version: 9.4.8
-    repository: https://charts.bitnami.com/bitnami
-    alias: mysql-dwh
