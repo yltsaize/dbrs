@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: src-orcl
+  labels:
+    app: src-orcl
+spec:
+  serviceName: src-orcl
+  replicas: 1
+  selector:
+    matchLabels:
+      app: src-orcl
+  template:
+    metadata:
+      labels:
+        app: src-orcl
+    spec:
+      containers:
+        - name: src-orcl
+          image: container-registry.oracle.com/database/enterprise:19.3.0.0
+          imagePullPolicy: Never # manually push image to k8s.
+          ports:
+            - name: http
+              containerPort: 5500
+              protocol: TCP
+            - name: oracle
+              containerPort: 1521
+              protocol: TCP
+          env:
+            - name: ORACLE_PWD
+              value: Passw0rd
+          volumeMounts:
+          - name: src-orcl
+            mountPath: /opt/oracle/oradata
+  volumeClaimTemplates:
+  - metadata:
+      name: src-orcl
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: src-orcl
+spec:
+  ports:
+  - name: http
+    port: 5500
+    protocol: TCP
+    targetPort: 5500
+  - name: oracle
+    port: 1521
+    protocol: TCP
+    targetPort: 1521
+  selector:
+    app: src-orcl
+  type: ClusterIP

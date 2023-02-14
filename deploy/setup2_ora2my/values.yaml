@@ -1,0 +1,12 @@
+mysql-dst:
+  auth:
+    database: tpcc
+    username: dbrs
+    password: Passw0rd
+    rootPassword: Passw0rd
+mysql-dwh:
+  auth:
+    database: tpcc
+    username: dbrs
+    password: Passw0rd
+    rootPassword: Passw0rd

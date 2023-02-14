@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: oraclient
+  labels:
+    app: oraclient
+spec:
+  serviceName: oraclient
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oraclient
+  template:
+    metadata:
+      labels:
+        app: oraclient
+    spec:
+      containers:
+        - name: oraclient
+          image: container-registry.oracle.com/database/instantclient:12.2.0.1
+          imagePullPolicy: Never # manually push image to k8s.
+          command: ["bash", "-c", "while true; do sleep 3; done"]
