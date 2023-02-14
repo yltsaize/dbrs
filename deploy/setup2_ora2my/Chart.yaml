@@ -1,5 +1,14 @@
 apiVersion: v2
 name: ora2my
-description: A Helm chart for Kubernetes
+description: "3 DBs: src-oracle, dwh-mysql, dst-mysql"
 type: application
 version: 0.1.0
+dependencies:
+- name: mysql
+  version: 9.4.8
+  repository: https://charts.bitnami.com/bitnami
+  alias: dwh-mysql
+- name: mysql
+  version: 9.4.8
+  repository: https://charts.bitnami.com/bitnami
+  alias: dst-mysql
