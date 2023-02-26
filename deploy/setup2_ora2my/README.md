@@ -172,6 +172,27 @@ SQL> exit
 
 ```
 
+#### Enable supplemental logging
+
+```bash
+> sqlplus sys/Passw0rd@//localhost:1521/ORCLCDB as sysdba
+
+SQL> ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
+Database altered.
+
+SQL> exit
+
+> sqlplus c##tpcc/tpcc@//localhost:1521/ORCLCDB
+
+--- For demo, only enable orders table.
+SQL> ALTER TABLE orders ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+Table altered.
+
+SQL> exit
+```
+
+
+
 ### Prearing MySQL DBs
 
 (TBD) need a way to easily map oracle DDL to mysql DDL.
