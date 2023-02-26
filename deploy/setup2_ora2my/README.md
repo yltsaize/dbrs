@@ -192,7 +192,6 @@ SQL> exit
 ```
 
 
-
 ### Prearing MySQL DBs
 
 (TBD) need a way to easily map oracle DDL to mysql DDL.
@@ -202,4 +201,6 @@ Tried "AWS Schema Conversion Tool", works good for me.
 
 ### Creating dbrs pipelines
 
-(TBD) Provide insomnia scripts for managing pipelines.
+1. Launch insomnia, import `apis/dbrs.yaml`, and run `DBRS/setup2_ora2my/Create src connector`.
+2. Check connector console logs and make sure no error.
+

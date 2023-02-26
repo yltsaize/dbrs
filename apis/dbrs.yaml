@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2023-02-11T13:05:18.088Z
+__export_date: 2023-02-26T09:54:22.531Z
 __export_source: insomnia.desktop.app:v2022.7.5
 resources:
   - _id: req_a62970cdf320426e848492dfd5595f43
@@ -85,55 +85,39 @@ resources:
     _type: request_group
   - _id: req_7fec5a3bf4d3450c87a59decd4fcf449
     parentId: fld_2147af5491364f1486b1cb469456b920
-    modified: 1676048232699
+    modified: 1677399729144
     created: 1676047697315
-    url: http://dbrs-cp-kafka-connect:8083/connector-plugins/io.debezium.connector.mysql.MySqlConnector/config/validate
+    url: http://dbrs-cp-kafka-connect:8083/connector-plugins/io.debezium.connector.oracle.OracleConnector/config/validate
     name: Validate config
     description: ""
     method: PUT
     body:
       mimeType: ""
-      text: "    {\r
-
-        \        \"name\": \"hello\",\r
-
-        \        \"connector.class\":
-        \"io.debezium.connector.mysql.MySqlConnector\",\r
-
-        \        \"tasks.max\": \"1\",\r
-
-        \        \"topic.prefix\": \"dbrs.src.tpcc\",\r
-
-        \        \"database.hostname\": \"dbrs-mysql-src\",\r
-
-        \        \"database.port\": \"3306\",\r
-
-        \        \"database.user\": \"root\",\r
-
-        \        \"database.password\": \"passw0rd\",\r
-
-        \        \"database.server.id\": \"10000\",\r
-
-        \        \"database.server.name\": \"mysql-src\",\r
-
-        \        \"database.include.list\": \"tpcc\",\r
-
-        \        \"database.history.kafka.bootstrap.servers\":
-        \"dbrs-cp-kafka:9092\",\r
-
-        \        \"database.history.kafka.topic\":
-        \"dbrs.history.src.tpcc\",\r
-
-        \        \"include.schema.changes\": \"false\",\r
-
-        \        \"transforms\": \"unwrap\",\r
-
-        \        \"transforms.unwrap.type\":
-        \"io.debezium.transforms.ExtractNewRecordState\",\r
-
-        \        \"transforms.unwrap.drop.tombstones=\": \"false\"\r
-
-        \    }"
+      text: >-
+        {
+                "connector.class": "io.debezium.connector.oracle.OracleConnector",
+                "tasks.max": "1",
+                "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "topic.prefix": "dbrs.src-orcl.tpcc",
+                "database.hostname": "src-orcl",
+                "database.port": "1521",
+                "database.user": "c##dbzuser",
+                "database.password": "dbz",
+                "database.dbname": "ORCLCDB",
+                "database.server.id": "20000",
+        			  "snapshot.locking.mode": "none",
+        			  "schema.include.list": "c##tpcc",
+                "schema.history.internal.kafka.bootstrap.servers": "dbrs-cp-kafka:9092",
+                "schema.history.internal.kafka.topic": "dbrs.history.oracle.tpcc",
+                "include.schema.changes": "false",
+                "transforms": "unwrap",
+                "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+                "transforms.unwrap.drop.tombstones": "false",
+                "name": "dbrs-src-oracle-tpcc",
+        			  "decimal.handling.mode": "double",
+        			  "time.precision.mode": "connect"
+        }
     parameters: []
     headers:
       - name: Content-Type
@@ -150,7 +134,7 @@ resources:
     _type: request
   - _id: req_3d49dbc249e44a2c83f95e643132279f
     parentId: fld_2147af5491364f1486b1cb469456b920
-    modified: 1676048238347
+    modified: 1676301956496
     created: 1676047697313
     url: http://dbrs-cp-kafka-connect:8083/connectors
     name: Create src-src-tpcc
@@ -158,65 +142,110 @@ resources:
     method: POST
     body:
       mimeType: ""
-      text: "{\r
-
-        \    \"name\": \"dbrs-src-src-tpcc\",\r
-
-        \    \"config\": {\r
-
-        \        \"connector.class\":
-        \"io.debezium.connector.mysql.MySqlConnector\",\r
-
-        \        \"tasks.max\": \"1\",\r
-
-        \        \"key.converter\":
-        \"org.apache.kafka.connect.json.JsonConverter\",\r
-
-        \        \"value.converter\":
-        \"org.apache.kafka.connect.json.JsonConverter\",\r
-
-        \        \"topic.prefix\": \"dbrs.src.tpcc\",\r
-
-        \        \"database.hostname\": \"dbrs-mysql-src\",\r
-
-        \        \"database.port\": \"3306\",\r
-
-        \        \"database.user\": \"root\",\r
-
-        \        \"database.password\": \"passw0rd\",\r
-
-        \        \"database.server.id\": \"10000\",\r
-
-        \        \"database.server.name\": \"mysql-src\",\r
-
-        \        \"database.include.list\": \"tpcc\",\r
-
-        \        \"schema.history.internal.kafka.bootstrap.servers\":
-        \"dbrs-cp-kafka:9092\",\r
-
-        \        \"schema.history.internal.kafka.topic\":
-        \"dbrs.history.src.tpcc\",\r
-
-        \        \"include.schema.changes\": \"false\",\r
-
-        \        \"transforms\": \"unwrap\",\r
-
-        \        \"transforms.unwrap.type\":
-        \"io.debezium.transforms.ExtractNewRecordState\",\r
-
-        \        \"transforms.unwrap.drop.tombstones=\": \"false\",\r
-
-        \        \"name\": \"dbrs-src-src-tpcc\"\r
-
-        \    }\r
-
-        }"
+      text: >-
+        {
+            "name": "dbrs-src-src-tpcc",
+            "config": {
+                "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+                "tasks.max": "1",
+                "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "topic.prefix": "dbrs.src.tpcc",
+                "database.hostname": "dbrs-mysql-src",
+                "database.port": "3306",
+                "database.user": "root",
+                "database.password": "passw0rd",
+                "database.server.id": "10000",
+                "database.server.name": "mysql-src",
+                "database.include.list": "tpcc",
+                "schema.history.internal.kafka.bootstrap.servers": "dbrs-cp-kafka:9092",
+                "schema.history.internal.kafka.topic": "dbrs.history.src.tpcc",
+                "include.schema.changes": "false",
+                "transforms": "unwrap",
+                "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+                "transforms.unwrap.drop.tombstones": "false",
+                "name": "dbrs-src-src-tpcc"
+            }
+        }
     parameters: []
     headers:
       - name: Content-Type
         value: application/json
     authentication: {}
     metaSortKey: -1676047697313
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_859ea011940b4d59aa91443aed17826f
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1677399557082
+    created: 1676211993671
+    url: http://dbrs-cp-kafka-connect:8083/connectors
+    name: Create src-oracle to topic src-orcl-tpcc
+    description: ""
+    method: POST
+    body:
+      mimeType: ""
+      text: >-
+        {
+            "name": "dbrs-src-oracle-tpcc",
+            "config": {
+                "connector.class": "io.debezium.connector.oracle.OracleConnector",
+                "tasks.max": "1",
+                "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "topic.prefix": "dbrs.src-orcl.tpcc",
+                "database.hostname": "src-orcl",
+                "database.port": "1521",
+                "database.user": "c##dbzuser",
+                "database.password": "dbz",
+                "database.dbname": "ORCLCDB",
+                "database.server.id": "20000",
+        			  "snapshot.locking.mode": "none",
+        			  "schema.include.list": "c##tpcc",
+                "schema.history.internal.kafka.bootstrap.servers": "dbrs-cp-kafka:9092",
+                "schema.history.internal.kafka.topic": "dbrs.history.oracle.tpcc",
+                "include.schema.changes": "false",
+                "transforms": "unwrap",
+                "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+                "transforms.unwrap.drop.tombstones": "false",
+                "name": "dbrs-src-oracle-tpcc",
+        			  "decimal.handling.mode": "double",
+        			  "time.precision.mode": "connect"
+            }
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1676047697312
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e0d657d6fc0a40228b4b5af71e1194eb
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1676213055062
+    created: 1676212987936
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-src-oracle-tpcc
+    name: Delete src-oracle-tpcc
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697311.5
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -340,7 +369,7 @@ resources:
     _type: request
   - _id: req_5bec812bc37b40e6bd5ff59e47817167
     parentId: fld_2147af5491364f1486b1cb469456b920
-    modified: 1676119060926
+    modified: 1676289911992
     created: 1676047697305
     url: http://dbrs-cp-kafka-connect:8083/connectors/
     name: Create - sink-tpcc.stock-dwh
@@ -356,14 +385,14 @@ resources:
                 "tasks.max": "1",
                 "key.converter": "org.apache.kafka.connect.json.JsonConverter",
                 "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-                "topics": "dbrs.src.tpcc.tpcc.stock",
+                "topics": "dbrs.src-orcl.tpcc.C__TPCC.STOCK",
                 "connection.url": "jdbc:mysql://dbrs-mysql-dwh:3306/tpcc?useSSL=false",
                 "connection.user": "root",
                 "connection.password": "passw0rd",
                 "table.name.format": "stock",
                 "insert.mode": "upsert",
                 "pk.mode": "record_key",
-                "pk.fields": "s_i_id",
+                "pk.fields": "S_I_ID",
                 "delete.enabled": true,
                 "auto.create": false,
                 "auto.evolve": false
@@ -452,9 +481,9 @@ resources:
     _type: request
   - _id: req_eaad39b4c79e4fa0977d176a4ff230f4
     parentId: fld_2147af5491364f1486b1cb469456b920
-    modified: 1676117835907
+    modified: 1676291918997
     created: 1676047697302
-    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-sink-tpcc.stock-dwh
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-sink-tpcc.orders-dwh
     name: Delete sink-tpcc.stock-dwh
     description: ""
     method: DELETE
@@ -471,9 +500,200 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_3e6ad8de54be4c8f8a8907a529ea4cbf
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1676301750618
+    created: 1676291798604
+    url: http://dbrs-cp-kafka-connect:8083/connectors/
+    name: Create - sink-tpcc.orders-dwh
+    description: ""
+    method: POST
+    body:
+      mimeType: ""
+      text: >-
+        {
+            "name": "dbrs-sink-tpcc.orders-dwh",
+            "config": {
+                "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+                "tasks.max": "1",
+                "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "topics": "dbrs.src-orcl.tpcc.C__TPCC2.ORDERS",
+                "connection.url": "jdbc:mysql://dbrs-mysql-dwh:3306/tpcc?useSSL=false",
+                "connection.user": "root",
+                "connection.password": "passw0rd",
+                "table.name.format": "orders",
+                "insert.mode": "upsert",
+                "pk.mode": "record_key",
+                "pk.fields": "O_W_ID,O_D_ID,O_ID",
+                "delete.enabled": false,
+                "auto.create": false,
+                "auto.evolve": false
+            }
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1676047697252
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3dd6b84271a347be9e6010153ca3f351
+    parentId: fld_2147af5491364f1486b1cb469456b920
+    modified: 1676300758478
+    created: 1676292453606
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-sink-tpcc.orders-dwh
+    name: Delete sink-tpcc.orders-dwh
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697202
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_fa18e28f13334b689c0a53d0818fd10f
+    parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
+    modified: 1677402730001
+    created: 1677402730001
+    url: http://dbrs-cp-kafka-connect:8083/connectors
+    name: List connectors
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697317
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_0d9c4f8b9539463f8c8e383580b2371a
+    parentId: fld_fb5c55d7b00147979514afd636e20368
+    modified: 1677402729976
+    created: 1677402729976
+    name: setup2_ora2my
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1676047697308.5
+    _type: request_group
+  - _id: req_afb8413e5f3a4e80aa0b258857c3961f
+    parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
+    modified: 1677402800207
+    created: 1677402730003
+    url: http://dbrs-cp-kafka-connect:8083/connectors
+    name: Create src connector
+    description: ""
+    method: POST
+    body:
+      mimeType: ""
+      text: >-
+        {
+            "name": "dbrs-src-oracle-tpcc",
+            "config": {
+                "connector.class": "io.debezium.connector.oracle.OracleConnector",
+                "tasks.max": "1",
+                "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "topic.prefix": "dbrs.src-orcl.tpcc",
+                "database.hostname": "src-orcl",
+                "database.port": "1521",
+                "database.user": "c##dbzuser",
+                "database.password": "dbz",
+                "database.dbname": "ORCLCDB",
+                "database.server.id": "20000",
+        			  "snapshot.locking.mode": "none",
+        			  "schema.include.list": "c##tpcc",
+                "schema.history.internal.kafka.bootstrap.servers": "dbrs-cp-kafka:9092",
+                "schema.history.internal.kafka.topic": "dbrs.history.oracle.tpcc",
+                "include.schema.changes": "false",
+                "transforms": "unwrap",
+                "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+                "transforms.unwrap.drop.tombstones": "false",
+                "name": "dbrs-src-oracle-tpcc",
+        			  "decimal.handling.mode": "double",
+        			  "time.precision.mode": "connect"
+            }
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1676047697312
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7aefb95fc3344cd09f9c0cf216013287
+    parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
+    modified: 1677402826794
+    created: 1677402730005
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-src-oracle-tpcc
+    name: Delete src connector
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697311.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a6a4960e45b34f78b79b838807ac3f0a
+    parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
+    modified: 1677405156627
+    created: 1677402729993
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-src-oracle-tpcc
+    name: Read src connector
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697311
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_d1289011d6374027b5609fbe894ef5c6
     parentId: fld_e249a882c9b847eba025d63c5e29def8
-    modified: 1676119045572
+    modified: 1676298149456
     created: 1676047697295
     url: http://dbrs-cp-kafka-rest:8082/topics
     name: List topics
@@ -502,6 +722,27 @@ resources:
     environmentPropertyOrder: null
     metaSortKey: -1676047697299
     _type: request_group
+  - _id: req_d55017346d47462d82eed7d1b232d508
+    parentId: fld_e249a882c9b847eba025d63c5e29def8
+    modified: 1676298166048
+    created: 1676298161747
+    url: http://dbrs-cp-kafka-rest:8082/topics/dbrs.src-orcl.tpcc.C__TPCC.ORDERS
+    name: Delete topics/dbrs.src-orcl.tpcc.C__TPCC.ORDERS
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697273.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: env_4d63cbcf3872889623ab3241b62fb3a353303e26
     parentId: wrk_8ace79d88cce4aaeb5c18d5b2b5616ab
     modified: 1676047583981
