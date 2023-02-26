@@ -13,6 +13,8 @@ helm install ora2my deploy/setup2_ora2my
 
 ### Preparing source DB
 
+#### Create TPCC dataset with HammerDB CLI.
+
 ```bash
 > kubectl exec -it deployments/hammerdb -- bash
 /home/hammerdb/HammerDB-4.6> ./hammerdbcli py auto ./scripts/python/oracle/tprocc/ora_tprocc_buildschema.py
@@ -54,6 +56,120 @@ In case you want to clear up everything:
 ```bash
 > kubectl exec -it deployments/hammerdb -- bash
 ./hammerdbcli py auto ./scripts/python/oracle/tprocc/ora_tprocc_deleteschema.py
+```
+
+#### Enable archive log with sqlplus.
+
+Reference: https://debezium.io/documentation/reference/stable/connectors/oracle.html#_preparing_the_database
+
+```bash
+> kubectl exec -it src-orcl-0 -- bash
+
+# in oracle container
+> mkdir -p /opt/oracle/oradata/recovery_area
+> ORACLE_SID=ORCLCDB sqlplus /nolog
+
+# in sqlplus
+SQL> CONNECT sys/Passw0rd AS SYSDBA
+Connected.
+
+SQL> alter system set db_recovery_file_dest_size = 10G;
+System altered.
+
+SQL> alter system set db_recovery_file_dest = '/opt/oracle/oradata/recovery_area' scope=spfile;
+System altered.
+
+SQL> shutdown immediate
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+
+SQL> startup mount
+ORACLE instance started.
+Total System Global Area 1610609888 bytes
+Fixed Size                  9135328 bytes
+Variable Size             486539264 bytes
+Database Buffers         1107296256 bytes
+Redo Buffers                7639040 bytes
+Database mounted.
+
+SQL> alter database archivelog;
+Database altered.
+
+SQL> alter database open;
+Database altered.
+
+-- Should now "Database log mode: Archive Mode"
+SQL> archive log list
+Database log mode              Archive Mode
+Automatic archival             Enabled
+Archive destination            USE_DB_RECOVERY_FILE_DEST
+Oldest online log sequence     20
+Next log sequence to archive   22
+Current log sequence           22
+
+SQL> exit
+Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+```
+
+#### Create dbz_user for debezium connector.
+
+Reference: https://debezium.io/documentation/reference/stable/connectors/oracle.html#creating-users-for-the-connector
+
+```bash
+# In oracle container
+> sqlplus sys/Passw0rd@//localhost:1521/ORCLCDB as sysdba
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+# in sqlplus
+SQL> CREATE TABLESPACE logminer_tbs DATAFILE '/opt/oracle/oradata/ORCLCDB/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+Tablespace created.
+
+SQL> exit
+
+> sqlplus sys/Passw0rd@//localhost:1521/ORCLPDB1 as sysdba
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+SQL> CREATE TABLESPACE logminer_tbs DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+Tablespace created.
+
+> sqlplus sys/Passw0rd@//localhost:1521/ORCLCDB as sysdba
+
+SQL> CREATE USER c##dbzuser IDENTIFIED BY dbz DEFAULT TABLESPACE logminer_tbs QUOTA UNLIMITED ON logminer_tbs CONTAINER=ALL;
+User created.
+
+SQL> --- Copy paste & run following statements one by one, all should show "Grant succeeded."
+    GRANT CREATE SESSION TO c##dbzuser CONTAINER=ALL;
+    GRANT SET CONTAINER TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT ON V_$DATABASE to c##dbzuser CONTAINER=ALL;
+    GRANT FLASHBACK ANY TABLE TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT ANY TABLE TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT_CATALOG_ROLE TO c##dbzuser CONTAINER=ALL;
+    GRANT EXECUTE_CATALOG_ROLE TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT ANY TRANSACTION TO c##dbzuser CONTAINER=ALL;
+    GRANT LOGMINING TO c##dbzuser CONTAINER=ALL;
+    GRANT CREATE TABLE TO c##dbzuser CONTAINER=ALL;
+    GRANT LOCK ANY TABLE TO c##dbzuser CONTAINER=ALL;
+    GRANT CREATE SEQUENCE TO c##dbzuser CONTAINER=ALL;
+    GRANT EXECUTE ON DBMS_LOGMNR TO c##dbzuser CONTAINER=ALL;
+    GRANT EXECUTE ON DBMS_LOGMNR_D TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT ON V_$LOG TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT ON V_$LOG_HISTORY TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT ON V_$LOGMNR_LOGS TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT ON V_$LOGMNR_CONTENTS TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT ON V_$LOGMNR_PARAMETERS TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT ON V_$LOGFILE TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT ON V_$ARCHIVED_LOG TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT ON V_$ARCHIVE_DEST_STATUS TO c##dbzuser CONTAINER=ALL;
+    GRANT SELECT ON V_$TRANSACTION TO c##dbzuser CONTAINER=ALL;
+
+SQL> exit
+
 ```
 
 ### Prearing MySQL DBs
