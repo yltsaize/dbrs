@@ -53,3 +53,7 @@ grafana:
   sidecar:
     dashboards:
       enabled: true
+kafka-lag-exporter:
+  clusters:
+  - name: cp-kafka
+    bootstrapBrokers: dbrs-cp-kafka:9092
