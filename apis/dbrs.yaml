@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2023-02-26T09:54:22.531Z
+__export_date: 2023-02-26T13:01:05.019Z
 __export_source: insomnia.desktop.app:v2022.7.5
 resources:
   - _id: req_a62970cdf320426e848492dfd5595f43
@@ -367,51 +367,6 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_5bec812bc37b40e6bd5ff59e47817167
-    parentId: fld_2147af5491364f1486b1cb469456b920
-    modified: 1676289911992
-    created: 1676047697305
-    url: http://dbrs-cp-kafka-connect:8083/connectors/
-    name: Create - sink-tpcc.stock-dwh
-    description: ""
-    method: POST
-    body:
-      mimeType: ""
-      text: >-
-        {
-            "name": "dbrs-sink-tpcc.stock-dwh",
-            "config": {
-                "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
-                "tasks.max": "1",
-                "key.converter": "org.apache.kafka.connect.json.JsonConverter",
-                "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-                "topics": "dbrs.src-orcl.tpcc.C__TPCC.STOCK",
-                "connection.url": "jdbc:mysql://dbrs-mysql-dwh:3306/tpcc?useSSL=false",
-                "connection.user": "root",
-                "connection.password": "passw0rd",
-                "table.name.format": "stock",
-                "insert.mode": "upsert",
-                "pk.mode": "record_key",
-                "pk.fields": "S_I_ID",
-                "delete.enabled": true,
-                "auto.create": false,
-                "auto.evolve": false
-            }
-        }
-    parameters: []
-    headers:
-      - name: Content-Type
-        value: application/json
-    authentication: {}
-    metaSortKey: -1676047697305
-    isPrivate: false
-    settingStoreCookies: true
-    settingSendCookies: true
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingRebuildPath: true
-    settingFollowRedirects: global
-    _type: request
   - _id: req_2afc366de4a24cbcb111b931656814f3
     parentId: fld_2147af5491364f1486b1cb469456b920
     modified: 1676048252949
@@ -683,6 +638,51 @@ resources:
     headers: []
     authentication: {}
     metaSortKey: -1676047697311
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5bec812bc37b40e6bd5ff59e47817167
+    parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
+    modified: 1677416448726
+    created: 1676047697305
+    url: http://dbrs-cp-kafka-connect:8083/connectors/
+    name: Create sink to ORDERS
+    description: ""
+    method: POST
+    body:
+      mimeType: ""
+      text: >-
+        {
+            "name": "dbrs-sink-tpcc.stock-dwh",
+            "config": {
+                "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+                "tasks.max": "1",
+                "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "topics": "dbrs.src-orcl.tpcc.C__TPCC.ORDERS",
+                "connection.url": "jdbc:mysql://ora2my-dwh-mysql:3306/tpcc?useSSL=false",
+                "connection.user": "dbrs",
+                "connection.password": "Passw0rd",
+                "table.name.format": "orders",
+                "insert.mode": "upsert",
+                "pk.mode": "record_key",
+                "pk.fields": "O_ID",
+                "delete.enabled": true,
+                "auto.create": false,
+                "auto.evolve": false
+            }
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1676047697261
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
