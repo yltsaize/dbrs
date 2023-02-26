@@ -199,8 +199,14 @@ SQL> exit
 Tried "AWS Schema Conversion Tool", works good for me.
 
 
-### Creating dbrs pipelines
+## Creating dbrs pipelines
 
 1. Launch insomnia, import `apis/dbrs.yaml`, and run `DBRS/setup2_ora2my/Create src connector`.
 2. Check connector console logs and make sure no error.
 
+## Generating traffic
+
+```bash
+> kubectl exec -it deployments/hammerdb -- bash
+/home/hammerdb/HammerDB-4.6> ./hammerdbcli py auto ./scripts/python/oracle/tprocc/ora_tprocc_run.py
+```
