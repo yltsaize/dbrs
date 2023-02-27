@@ -15,10 +15,11 @@ spec:
       labels:
         app: src-orcl
     spec:
+      imagePullSecrets:
+        - name: docker-config
       containers:
         - name: src-orcl
           image: container-registry.oracle.com/database/enterprise:19.3.0.0
-          imagePullPolicy: Never # manually push image to k8s.
           ports:
             - name: http
               containerPort: 5500

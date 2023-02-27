@@ -2,13 +2,36 @@
 
 Scenario: src-orcl (oracledb) => kafka => dwh-mysql => kafka => dst-mysql
 
+## Pre-requisite
+
+You'll need access to oracle's container registry:
+
+1. Sign up an oracle account in https://profile.oracle.com using your personal email
+2. Go to https://container-registry.oracle.com and sign in with your oracle account
+3. Browse to `Database` -> `enterprise`, read and agree the `Oracle Standard Terms and Restrictions`
+4. Verify you can do `docker login container-registry.oracle.com` with your oracle account
+
+
 ## Installing DB
 
 ```bash
-# require logging into oracle.com
-docker pull container-registry.oracle.com/database/enterprise:19.3.0.0
-kind load docker-image container-registry.oracle.com/database/enterprise:19.3.0.0
-helm install ora2my deploy/setup2_ora2my
+# login with your oracle account
+> docker login container-registry.oracle.com
+
+# verify auth context is saved in $HOME/.docker/config.json
+> cat $HOME/.docker/config.json
+{
+  "auths": {
+    "container-registry.oracle.com": {
+      "auth": "***"
+    }
+  }
+}
+
+# create secret, the name `docker-config` is hard-coded in deployment templates.
+> kubectl create secret generic docker-config --from-file=.dockerconfigjson=$HOME/.docker/config.json --type=kubernetes.io/dockerconfigjson
+
+> helm install ora2my deploy/setup2_ora2my
 ```
 
 ### Preparing source DB
