@@ -1,12 +1,12 @@
 version: '2'
 services:
   debezium-connect:
-    image: debezium-connect:2.2-4
+    image: yltsaize/debezium-connect:2.2-4
     build:
       context: debezium-connect
       args:
         DEBEZIUM_VERSION: 2.2
         JMX_AGENT_VERSION: 0.15.0
   hammerdb:
-    image: hammerdb:4.6
+    image: yltsaize/hammerdb:4.6
     build: hammerdb
