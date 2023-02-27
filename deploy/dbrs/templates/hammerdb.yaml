@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: hammerdb
-          image: hammerdb:4.6
+          image: yltsaize/hammerdb:4.6
           command: ["bash", "-c", "while true; do sleep 3; done"]
           resources:
 {{ toYaml .Values.debezium_ui.resources | indent 12 }}
