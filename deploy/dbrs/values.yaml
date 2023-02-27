@@ -50,20 +50,25 @@ prometheus:
       scrape_interval: 20s
       scrape_timeout: 10s
     resources: {}
+  podSecurityPolicy:
+    enabled: false
+  rbac:
+    create: false
   alertmanager:
     enabled: false
   prometheus-pushgateway:
     enabled: false
   prometheus-node-exporter:
-    enabled: true
-    resources: {}
+    enabled: false
   kube-state-metrics:
-    enabled: true
-    resources: {}
+    enabled: false
   configmapReload:
     prometheus:
       enabled: false
 grafana:
+  rbac:
+    create: false
+    pspEnabled: false
   datasources:
     datasources.yaml:
       apiVersion: 1
