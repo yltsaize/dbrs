@@ -13,7 +13,7 @@ repositories:
 releases:
 - name: dbrs
   chart: ./dbrs
-  namespace: devns5
+  namespace: devns1
   createNamespace: false
   values:
   - cp-helm-charts:
@@ -112,7 +112,7 @@ releases:
           memory: 512Mi
 - name: ora2my
   chart: ./setup2_ora2my
-  namespace: devns7
+  namespace: devns1
   createNamespace: false
   values:
   - src_oracle:
@@ -127,7 +127,22 @@ releases:
 - name: dwh-mysql
   chart: bitnami/mysql
   version: 9.4.8
-  namespace: devns3
+  namespace: devns1
+  createNamespace: false
+  values:
+  - auth:
+      database: tpcc
+      username: dbrs
+      password: Passw0rd
+      rootPassword: Passw0rd
+    resources:
+      requests:
+        cpu: 4
+        memory: 8Gi
+- name: dst-mysql
+  chart: bitnami/mysql
+  version: 9.4.8
+  namespace: devns1
   createNamespace: false
   values:
   - auth:

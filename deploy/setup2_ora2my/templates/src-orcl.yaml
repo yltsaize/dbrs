@@ -19,7 +19,7 @@ spec:
         - name: docker-config
       containers:
         - name: src-orcl
-          image: container-registry.oracle.com/database/enterprise:19.3.0.0
+          image: yltsaize/oracle:19.3.0.0-debug-1
           resources:
 {{ toYaml .Values.src_oracle.resources | indent 12 }}
           ports:
@@ -68,7 +68,7 @@ spec:
   - name: oracle
     port: 1521
     protocol: TCP
-    targetPort: 1521
+    targetPort: 8080 # workaround for k8s blocking non-standard ports
   selector:
     app: src-orcl
   type: ClusterIP
