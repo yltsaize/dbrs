@@ -35,6 +35,15 @@ spec:
           volumeMounts:
           - name: src-orcl
             mountPath: /opt/oracle/oradata
+          {{ range $path, $bytes := .Files.Glob ( printf "scripts/**") -}}
+          - name: scripts
+            mountPath: {{ printf "/opt/oracle/%s" $path | indent 14 }}
+            subPath: {{ sha256sum $path | indent 14 }}
+          {{ end }}
+      volumes:
+        - name: scripts
+          configMap:
+            name: {{ .Release.Name }}-scripts
       securityContext:
         fsGroup: 54321 # group id for oracle image.
   volumeClaimTemplates:

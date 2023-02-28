@@ -32,11 +32,95 @@ You'll need access to oracle's container registry:
 > kubectl create secret generic docker-config --from-file=.dockerconfigjson=$HOME/.docker/config.json --type=kubernetes.io/dockerconfigjson
 
 > helm install ora2my deploy/setup2_ora2my
+
+# wait unti you see following messages
+> kubectl logs -f src-orcl-0
+...
+#########################
+DATABASE IS READY TO USE!
+#########################
+...
 ```
 
-### Preparing source DB
+## Prepare DB for debezium
 
-#### Create TPCC dataset with HammerDB CLI.
+The steps to [prepare oracle for debezium](https://debezium.io/documentation/reference/stable/connectors/oracle.html) are implemented via oracle setup scripts in `scripts/setup`, and will be executed the first time oracleDB is launched.
+
+Verify these outputs in the console logs of src-orcl-0:
+
+
+**Outputs of dbz-prepare-db**
+
+```bash
+
+Connected.
+
+System altered.
+System altered.
+
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+
+ORACLE instance started.
+Total System Global Area 1610609888 bytes
+Fixed Size                  9135328 bytes
+Variable Size             486539264 bytes
+Database Buffers         1107296256 bytes
+Redo Buffers                7639040 bytes
+Database mounted.
+
+Database altered.
+
+Database altered.
+
+Database log mode              Archive Mode
+Automatic archival             Enabled
+Archive destination            USE_DB_RECOVERY_FILE_DEST
+Oldest online log sequence     20
+Next log sequence to archive   22
+Current log sequence           22
+
+Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+```
+
+**Outputs of dbz-create-user**
+
+```bash
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+Tablespace created.
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+Tablespace created.
+
+User created.
+
+# Should see a bunch of this.
+Grant succeeded.
+
+```
+
+Note that supplemental logging have to be done for tables and columns that need CDC, and is not covered by setup script:
+
+```bash
+> sqlplus c##tpcc/tpcc@//localhost:1521/ORCLCDB
+
+--- For demo, only enable orders table.
+SQL> ALTER TABLE orders ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+Table altered.
+
+SQL> exit
+```
+
+
+## Create TPCC dataset with HammerDB CLI.
 
 ```bash
 > kubectl exec -it deployments/hammerdb -- bash
@@ -81,141 +165,8 @@ In case you want to clear up everything:
 ./hammerdbcli py auto ./scripts/python/oracle/tprocc/ora_tprocc_deleteschema.py
 ```
 
-#### Enable archive log with sqlplus.
 
-Reference: https://debezium.io/documentation/reference/stable/connectors/oracle.html#_preparing_the_database
-
-```bash
-> kubectl exec -it src-orcl-0 -- bash
-
-# in oracle container
-> mkdir -p /opt/oracle/oradata/recovery_area
-> ORACLE_SID=ORCLCDB sqlplus /nolog
-
-# in sqlplus
-SQL> CONNECT sys/Passw0rd AS SYSDBA
-Connected.
-
-SQL> alter system set db_recovery_file_dest_size = 10G;
-System altered.
-
-SQL> alter system set db_recovery_file_dest = '/opt/oracle/oradata/recovery_area' scope=spfile;
-System altered.
-
-SQL> shutdown immediate
-Database closed.
-Database dismounted.
-ORACLE instance shut down.
-
-SQL> startup mount
-ORACLE instance started.
-Total System Global Area 1610609888 bytes
-Fixed Size                  9135328 bytes
-Variable Size             486539264 bytes
-Database Buffers         1107296256 bytes
-Redo Buffers                7639040 bytes
-Database mounted.
-
-SQL> alter database archivelog;
-Database altered.
-
-SQL> alter database open;
-Database altered.
-
--- Should now "Database log mode: Archive Mode"
-SQL> archive log list
-Database log mode              Archive Mode
-Automatic archival             Enabled
-Archive destination            USE_DB_RECOVERY_FILE_DEST
-Oldest online log sequence     20
-Next log sequence to archive   22
-Current log sequence           22
-
-SQL> exit
-Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-Version 19.3.0.0.0
-```
-
-#### Create dbz_user for debezium connector.
-
-Reference: https://debezium.io/documentation/reference/stable/connectors/oracle.html#creating-users-for-the-connector
-
-```bash
-# In oracle container
-> sqlplus sys/Passw0rd@//localhost:1521/ORCLCDB as sysdba
-Connected to:
-Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-Version 19.3.0.0.0
-
-# in sqlplus
-SQL> CREATE TABLESPACE logminer_tbs DATAFILE '/opt/oracle/oradata/ORCLCDB/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
-Tablespace created.
-
-SQL> exit
-
-> sqlplus sys/Passw0rd@//localhost:1521/ORCLPDB1 as sysdba
-Connected to:
-Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-Version 19.3.0.0.0
-
-SQL> CREATE TABLESPACE logminer_tbs DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
-Tablespace created.
-
-> sqlplus sys/Passw0rd@//localhost:1521/ORCLCDB as sysdba
-
-SQL> CREATE USER c##dbzuser IDENTIFIED BY dbz DEFAULT TABLESPACE logminer_tbs QUOTA UNLIMITED ON logminer_tbs CONTAINER=ALL;
-User created.
-
-SQL> --- Copy paste & run following statements one by one, all should show "Grant succeeded."
-    GRANT CREATE SESSION TO c##dbzuser CONTAINER=ALL;
-    GRANT SET CONTAINER TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT ON V_$DATABASE to c##dbzuser CONTAINER=ALL;
-    GRANT FLASHBACK ANY TABLE TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT ANY TABLE TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT_CATALOG_ROLE TO c##dbzuser CONTAINER=ALL;
-    GRANT EXECUTE_CATALOG_ROLE TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT ANY TRANSACTION TO c##dbzuser CONTAINER=ALL;
-    GRANT LOGMINING TO c##dbzuser CONTAINER=ALL;
-    GRANT CREATE TABLE TO c##dbzuser CONTAINER=ALL;
-    GRANT LOCK ANY TABLE TO c##dbzuser CONTAINER=ALL;
-    GRANT CREATE SEQUENCE TO c##dbzuser CONTAINER=ALL;
-    GRANT EXECUTE ON DBMS_LOGMNR TO c##dbzuser CONTAINER=ALL;
-    GRANT EXECUTE ON DBMS_LOGMNR_D TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT ON V_$LOG TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT ON V_$LOG_HISTORY TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT ON V_$LOGMNR_LOGS TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT ON V_$LOGMNR_CONTENTS TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT ON V_$LOGMNR_PARAMETERS TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT ON V_$LOGFILE TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT ON V_$ARCHIVED_LOG TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT ON V_$ARCHIVE_DEST_STATUS TO c##dbzuser CONTAINER=ALL;
-    GRANT SELECT ON V_$TRANSACTION TO c##dbzuser CONTAINER=ALL;
-
-SQL> exit
-
-```
-
-#### Enable supplemental logging
-
-```bash
-> sqlplus sys/Passw0rd@//localhost:1521/ORCLCDB as sysdba
-
-SQL> ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
-Database altered.
-
-SQL> exit
-
-> sqlplus c##tpcc/tpcc@//localhost:1521/ORCLCDB
-
---- For demo, only enable orders table.
-SQL> ALTER TABLE orders ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
-Table altered.
-
-SQL> exit
-```
-
-
-### Prearing MySQL DBs
+## Prearing MySQL DBs
 
 (TBD) need a way to easily map oracle DDL to mysql DDL.
 

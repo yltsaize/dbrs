@@ -1,0 +1,9 @@
+# https://itnext.io/helm-3-mapping-a-directory-of-files-into-a-container-ed6c54372df8
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-scripts
+binaryData:
+{{ range $path, $bytes := .Files.Glob (printf "scripts/**")}}
+{{- sha256sum $path | indent 2 }}{{ print ": "}}{{ $.Files.Get $path | b64enc }}
+{{ end }}
