@@ -64,6 +64,8 @@ prometheus:
     prometheus:
       enabled: false
 grafana:
+  adminUser: admin
+  adminPassword: Passw0rd
   datasources:
     datasources.yaml:
       apiVersion: 1
