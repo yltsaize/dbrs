@@ -10,3 +10,6 @@ services:
   hammerdb:
     image: yltsaize/hammerdb:4.6
     build: hammerdb
+  oracle:
+    image: yltsaize/oracle:19.3.0.0-debug-1
+    build: oracle
