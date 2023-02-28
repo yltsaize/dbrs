@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2023-02-26T15:25:57.026Z
+__export_date: 2023-02-28T10:20:46.179Z
 __export_source: insomnia.desktop.app:v2022.7.5
 resources:
   - _id: req_a62970cdf320426e848492dfd5595f43
@@ -260,7 +260,7 @@ resources:
     _type: request
   - _id: req_5bec812bc37b40e6bd5ff59e47817167
     parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
-    modified: 1677424939499
+    modified: 1677425970015
     created: 1676047697305
     url: http://dbrs-cp-kafka-connect:8083/connectors/
     name: 02.060 Create TPCC.ORDERS sink
@@ -270,7 +270,7 @@ resources:
       mimeType: ""
       text: >-
         {
-            "name": "dbrs-sink-tpcc.stock-dwh",
+            "name": "dbrs-sink-tpcc.orders-dwh",
             "config": {
                 "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
                 "tasks.max": "1",
@@ -305,9 +305,9 @@ resources:
     _type: request
   - _id: req_bcd114a53e0f4e0b9268d09c18ceb159
     parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
-    modified: 1677425070203
+    modified: 1677425981275
     created: 1677425028207
-    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-sink-tpcc.stock-dwh
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-sink-tpcc.orders-dwh
     name: 02.070 Delete TPCC.ORDERS sink
     description: ""
     method: DELETE
@@ -337,6 +337,72 @@ resources:
     headers: []
     authentication: {}
     metaSortKey: -1676047697211
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5a0d43c096c4449c9393b6f50eb26b32
+    parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
+    modified: 1677426177066
+    created: 1677425942794
+    url: http://dbrs-cp-kafka-connect:8083/connectors/
+    name: 02.100 Create TPCC.ORDER_LINE sink
+    description: ""
+    method: POST
+    body:
+      mimeType: ""
+      text: >-
+        {
+            "name": "dbrs-sink-tpcc.order_line-dwh",
+            "config": {
+                "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+                "tasks.max": "1",
+                "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "topics": "dbrs.src-orcl.tpcc.C__TPCC.ORDER_LINE",
+                "connection.url": "jdbc:mysql://ora2my-dwh-mysql:3306/tpcc?useSSL=false",
+                "connection.user": "dbrs",
+                "connection.password": "Passw0rd",
+                "table.name.format": "order_line",
+                "insert.mode": "upsert",
+                "pk.mode": "record_key",
+                "pk.fields": "OL_W_ID,OL_D_ID,OL_O_ID,OL_NUMBER",
+                "delete.enabled": true,
+                "auto.create": false,
+                "auto.evolve": false
+            }
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1676047697161
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_923c5579ed1e4a4ea5c322c780adbe2c
+    parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
+    modified: 1677426200477
+    created: 1677426194023
+    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-sink-tpcc.order_line-dwh
+    name: 02.110 Delete TPCC.ORDER_LINE sink
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697111
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
