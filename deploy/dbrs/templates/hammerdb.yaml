@@ -19,7 +19,7 @@ spec:
           image: yltsaize/hammerdb:4.6
           command: ["bash", "-c", "while true; do sleep 3; done"]
           resources:
-{{ toYaml .Values.debezium_ui.resources | indent 12 }}
+{{ toYaml .Values.hammerdb.resources | indent 12 }}
           volumeMounts:
             {{ range $path, $bytes := .Files.Glob ( printf "scripts/**") -}}
             - name: dbrs-scripts
