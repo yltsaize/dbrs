@@ -1,10 +1,12 @@
 dwh-mysql:
+  enabled: true
   auth:
     database: tpcc
     username: dbrs
     password: Passw0rd
     rootPassword: Passw0rd
 dst-mysql:
+  enabled: false
   auth:
     database: tpcc
     username: dbrs
