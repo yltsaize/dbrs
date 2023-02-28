@@ -84,7 +84,8 @@ releases:
           enabled: false
     grafana:
       rbac:
-        create: false
+        create: true
+        namespaced: true
         pspEnabled: false
       sidecar:
         resources:
