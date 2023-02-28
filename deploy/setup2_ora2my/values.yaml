@@ -1,3 +1,5 @@
+src_oracle:
+  resources: {}
 dwh-mysql:
   enabled: true
   auth:

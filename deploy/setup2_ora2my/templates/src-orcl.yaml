@@ -20,6 +20,8 @@ spec:
       containers:
         - name: src-orcl
           image: container-registry.oracle.com/database/enterprise:19.3.0.0
+          resources:
+{{ toYaml .Values.src_oracle.resources | indent 12 }}
           ports:
             - name: http
               containerPort: 5500
