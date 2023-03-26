@@ -39,8 +39,8 @@ cp-helm-charts:
       "status.storage.replication.factor": "1"
     resources:
       requests:
-        cpu: 250m
-        memory: 512Mi
+        cpu: 2
+        memory: 8Gi
     prometheus:
       jmx:
         enabled: true
