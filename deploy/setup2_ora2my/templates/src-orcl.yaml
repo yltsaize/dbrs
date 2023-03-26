@@ -18,7 +18,10 @@ spec:
       containers:
         - name: src-orcl
           image: container-registry.oracle.com/database/enterprise:19.3.0.0
-          imagePullPolicy: Never # manually push image to k8s.
+          resources:
+            requests:
+              memory: 16Gi
+              cpu: 4
           ports:
             - name: http
               containerPort: 5500
