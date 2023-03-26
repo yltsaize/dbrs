@@ -32,6 +32,8 @@ spec:
           volumeMounts:
           - name: src-orcl
             mountPath: /opt/oracle/oradata
+      securityContext:
+        fsGroup: 54321
   volumeClaimTemplates:
   - metadata:
       name: src-orcl
