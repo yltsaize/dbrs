@@ -31,7 +31,8 @@ First, run up dbrs:
 > kubectl get pods -w
 
 # kubefwd all services to local
-> kubefwd svc -n dbrs
+> sudo cp -R ~/.kube /root/.kube
+> sudo kubefwd svc -n dbrs
 ```
 
 Once everything is up and running, try to see if API works:
