@@ -7,7 +7,8 @@ repositories:
   url: https://grafana.github.io/helm-charts
 - name: kafka-lag-exporter
   url: https://seglo.github.io/kafka-lag-exporter/repo
-
+- name: bitnami
+  url: https://charts.bitnami.com/bitnami
 releases:
 - name: dbrs
   chart: ./dbrs
