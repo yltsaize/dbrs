@@ -16,3 +16,9 @@ releases:
   chart: ./dbrs
 - name: ora2my
   chart: ./setup2_ora2my
+  values:
+  - src_oracle:
+      resources:
+        requests:
+          cpu: 4
+          memory: 32Gi
