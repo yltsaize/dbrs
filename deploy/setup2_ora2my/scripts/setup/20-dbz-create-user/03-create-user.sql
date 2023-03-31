@@ -30,4 +30,8 @@ GRANT SELECT ON V_$ARCHIVED_LOG TO c##dbzuser CONTAINER=ALL;
 GRANT SELECT ON V_$ARCHIVE_DEST_STATUS TO c##dbzuser CONTAINER=ALL; 
 GRANT SELECT ON V_$TRANSACTION TO c##dbzuser CONTAINER=ALL; 
 
+
+--- signal table
+CREATE TABLE c##dbzuser.debezium_signal (id VARCHAR(42) PRIMARY KEY, type VARCHAR(32) NOt NULL, data VARCHAR(2048) NULL);
+ALTER TABLE c##dbzuser.debezium_signal ADD SUPPLEMENTAL LOG data(all) columns;
 exit;
