@@ -18,6 +18,7 @@ releases:
   chart: ./setup2_ora2my
   values:
   - src_oracle:
+      storage: 100Gi
       resources:
         requests:
           cpu: 4
