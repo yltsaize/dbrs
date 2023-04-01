@@ -184,3 +184,17 @@ Tried "AWS Schema Conversion Tool", works good for me.
 > kubectl exec -it deployments/hammerdb -- bash
 /home/hammerdb/HammerDB-4.6> ./hammerdbcli py auto ./scripts/python/oracle/tprocc/ora_tprocc_run.py
 ```
+
+## Incremental snapshot
+
+(haven't success yet)
+
+```sql
+SQL> INSERT INTO C##DBZUSER.DEBEZIUM_SIGNAL (id,type,data) VALUES (CURRENT_TIMESTAMP,'log','{"message":"Hello World"}');
+
+1 row created.
+
+SQL> INSERT INTO C##DBZUSER.DEBEZIUM_SIGNAL (id,type,data) VALUES (CURRENT_TIMESTAMP,'execute-snapshot','{"data-collections":["ORCLCDB.C##TPCC.STOCKS"],"type":"incremental"}}');
+
+1 row created.
+```
