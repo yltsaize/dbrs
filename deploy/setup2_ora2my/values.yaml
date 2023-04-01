@@ -1,5 +1,6 @@
 src_oracle:
   resources: {}
+  storage: 10Gi
 dwh-mysql:
   enabled: true
   auth:
