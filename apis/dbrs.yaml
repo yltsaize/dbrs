@@ -7,7 +7,7 @@ resources:
     parentId: fld_9cce845d3739420faa70c95d5407a362
     modified: 1676048191979
     created: 1676047697320
-    url: http://dbrs-cp-kafka-connect:8083/connector-plugins
+    url: http://dbrs-cp-kafka-connect:8080/connector-plugins
     name: List connector-plugins
     description: ""
     method: GET
@@ -56,7 +56,7 @@ resources:
     parentId: fld_fb5c55d7b00147979514afd636e20368
     modified: 1677424964164
     created: 1676047697317
-    url: http://dbrs-cp-kafka-connect:8083/connectors
+    url: http://dbrs-cp-kafka-connect:8080/connectors
     name: 00.010 List connectors
     description: ""
     method: GET
@@ -98,7 +98,7 @@ resources:
     parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
     modified: 1677424756342
     created: 1677402730001
-    url: http://dbrs-cp-kafka-connect:8083/connectors
+    url: http://dbrs-cp-kafka-connect:8080/connectors
     name: 02.010 List connectors
     description: ""
     method: GET
@@ -129,7 +129,7 @@ resources:
     parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
     modified: 1680361426811
     created: 1677402730003
-    url: http://dbrs-cp-kafka-connect:8083/connectors
+    url: http://dbrs-cp-kafka-connect:8080/connectors
     name: 02.020 Create TPCC src
     description: ""
     method: POST
@@ -183,7 +183,7 @@ resources:
     parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
     modified: 1677425022597
     created: 1677402730005
-    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-src-oracle-tpcc
+    url: http://dbrs-cp-kafka-connect:8080/connectors/dbrs-src-oracle-tpcc
     name: 02.030 Delete TPCC src
     description: ""
     method: DELETE
@@ -204,7 +204,7 @@ resources:
     parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
     modified: 1677424920168
     created: 1677402729993
-    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-src-oracle-tpcc
+    url: http://dbrs-cp-kafka-connect:8080/connectors/dbrs-src-oracle-tpcc
     name: 02.040 Read TPCC src
     description: ""
     method: GET
@@ -264,7 +264,7 @@ resources:
     parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
     modified: 1677425970015
     created: 1676047697305
-    url: http://dbrs-cp-kafka-connect:8083/connectors/
+    url: http://dbrs-cp-kafka-connect:8080/connectors/
     name: 02.060 Create TPCC.ORDERS sink
     description: ""
     method: POST
@@ -309,7 +309,7 @@ resources:
     parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
     modified: 1677425981275
     created: 1677425028207
-    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-sink-tpcc.orders-dwh
+    url: http://dbrs-cp-kafka-connect:8080/connectors/dbrs-sink-tpcc.orders-dwh
     name: 02.070 Delete TPCC.ORDERS sink
     description: ""
     method: DELETE
@@ -351,7 +351,7 @@ resources:
     parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
     modified: 1677426177066
     created: 1677425942794
-    url: http://dbrs-cp-kafka-connect:8083/connectors/
+    url: http://dbrs-cp-kafka-connect:8080/connectors/
     name: 02.100 Create TPCC.ORDER_LINE sink
     description: ""
     method: POST
@@ -396,7 +396,7 @@ resources:
     parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
     modified: 1677426200477
     created: 1677426194023
-    url: http://dbrs-cp-kafka-connect:8083/connectors/dbrs-sink-tpcc.order_line-dwh
+    url: http://dbrs-cp-kafka-connect:8080/connectors/dbrs-sink-tpcc.order_line-dwh
     name: 02.110 Delete TPCC.ORDER_LINE sink
     description: ""
     method: DELETE
