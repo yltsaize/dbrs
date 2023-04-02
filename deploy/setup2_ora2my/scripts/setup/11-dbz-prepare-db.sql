@@ -1,6 +1,6 @@
 --- https://debezium.io/documentation/reference/stable/connectors/oracle.html#_preparing_the_database
 
-alter system set db_recovery_file_dest_size = 10G;
+alter system set db_recovery_file_dest_size = 300G;
 alter system set db_recovery_file_dest = '/opt/oracle/oradata/recovery_area' scope=spfile;
 shutdown immediate
 startup mount
