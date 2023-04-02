@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2023-04-01T15:07:56.969Z
+__export_date: 2023-04-02T05:13:43.975Z
 __export_source: insomnia.desktop.app:v2022.7.5
 resources:
   - _id: req_a62970cdf320426e848492dfd5595f43
@@ -52,6 +52,52 @@ resources:
     description: Manages DBRS connectors, topics etc.
     scope: design
     _type: workspace
+  - _id: req_a96f2dc08ef44b8586e9a4e55cbcfe74
+    parentId: fld_9cce845d3739420faa70c95d5407a362
+    modified: 1680412152217
+    created: 1680412077592
+    url: http://dbrs-cp-kafka-connect:8080/admin/loggers
+    name: 00.020 Get Log Levels
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697270
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_949a315ff46447ecbcefe4ecd660f883
+    parentId: fld_9cce845d3739420faa70c95d5407a362
+    modified: 1680412404374
+    created: 1680412132489
+    url: http://dbrs-cp-kafka-connect:8080/admin/loggers/io.debezium.connector.oracle
+    name: 00.030 Set Log Levels
+    description: ""
+    method: PUT
+    body:
+      mimeType: ""
+      text: '{ "level": "DEBUG" }'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1676047697265.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_4052585c657246f48e6eaf5e40251bfb
     parentId: fld_fb5c55d7b00147979514afd636e20368
     modified: 1677424964164
@@ -127,7 +173,7 @@ resources:
     _type: request_group
   - _id: req_afb8413e5f3a4e80aa0b258857c3961f
     parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
-    modified: 1680361426811
+    modified: 1680411547807
     created: 1677402730003
     url: http://dbrs-cp-kafka-connect:8080/connectors
     name: 02.020 Create TPCC src
@@ -151,8 +197,9 @@ resources:
                 "database.dbname": "ORCLCDB",
                 "database.server.id": "20000",
         			  "snapshot.locking.mode": "none",
-        				"snapshot.mode": "schema_only",
+        				"snapshot.mode": "initial",
         			  "schema.include.list": "c##tpcc",
+        			  "table.include.list": "C##DBZUSER.DEBEZIUM_SIGNAL",
         			  "signal.data.collection": "ORCLCDB.C##DBZUSER.DEBEZIUM_SIGNAL",
                 "schema.history.internal.kafka.bootstrap.servers": "dbrs-cp-kafka:9092",
                 "schema.history.internal.kafka.topic": "dbrs.history.oracle.tpcc",
@@ -171,6 +218,57 @@ resources:
         value: application/json
     authentication: {}
     metaSortKey: -1676047697312
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d1c3bcce7f374e7f8dc14b6a038a648c
+    parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
+    modified: 1680408325832
+    created: 1680408218652
+    url: http://dbrs-cp-kafka-connect:8080/connectors/dbrs-src-oracle-tpcc/config
+    name: 02.025 Update TPCC src
+    description: ""
+    method: PUT
+    body:
+      mimeType: ""
+      text: >-
+        {
+                "connector.class": "io.debezium.connector.oracle.OracleConnector",
+                "tasks.max": "1",
+                "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+                "topic.prefix": "dbrs.src-orcl.tpcc",
+                "database.hostname": "src-orcl",
+                "database.port": "1521",
+                "database.user": "c##dbzuser",
+                "database.password": "dbz",
+                "database.dbname": "ORCLCDB",
+                "database.server.id": "20000",
+        			  "snapshot.locking.mode": "none",
+        				"snapshot.mode": "schema_only_recovery",
+        			  "schema.include.list": "c##tpcc",
+        			  "signal.data.collection": "ORCLCDB.C##DBZUSER.DEBEZIUM_SIGNAL",
+                "schema.history.internal.kafka.bootstrap.servers": "dbrs-cp-kafka:9092",
+                "schema.history.internal.kafka.topic": "dbrs.history.oracle.tpcc",
+                "include.schema.changes": "false",
+                "transforms": "unwrap",
+                "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+                "transforms.unwrap.drop.tombstones": "false",
+                "name": "dbrs-src-oracle-tpcc",
+        			  "decimal.handling.mode": "double",
+        			  "time.precision.mode": "connect"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1676047697311.75
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
