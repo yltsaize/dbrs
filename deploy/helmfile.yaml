@@ -14,6 +14,10 @@ repositories:
 releases:
 - name: dbrs
   chart: ./dbrs
+  values:
+  - cp-helm-charts:
+      cp-kafka-connect:
+        servicePort: 8080
 - name: ora2my
   chart: ./setup2_ora2my
   values:

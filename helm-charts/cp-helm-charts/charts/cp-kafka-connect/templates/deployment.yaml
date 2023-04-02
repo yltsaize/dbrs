@@ -50,6 +50,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+            - name: CONNECT_LISTENERS
+              value: {{ printf "HTTP://:%s" (.Values.servicePort | toString) | quote }}
+            - name: REST_PORT
+              value: {{ .Values.servicePort | quote }}
+            - name: ADVERTISED_PORT
+              value: {{ .Values.servicePort | quote }}
             - name: BOOTSTRAP_SERVERS
               value: {{ template "cp-kafka-connect.kafka.bootstrapServers" . }}
             - name: GROUP_ID

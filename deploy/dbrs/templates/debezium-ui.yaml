@@ -23,7 +23,7 @@ spec:
               protocol: TCP
           env:
             - name: KAFKA_CONNECT_URIS
-              value: http://dbrs-cp-kafka-connect:8083
+              value: {{ printf "http://dbrs-cp-kafka-connect:%s" ((index .Values "cp-helm-charts" "cp-kafka-connect" "servicePort") | toString) }}
           resources:
 {{ toYaml .Values.debezium_ui.resources | indent 12 }}
 ---
