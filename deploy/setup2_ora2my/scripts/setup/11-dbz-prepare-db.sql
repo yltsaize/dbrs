@@ -1,11 +1,11 @@
 --- https://debezium.io/documentation/reference/stable/connectors/oracle.html#_preparing_the_database
 
-alter system set db_recovery_file_dest_size = 300G;
-alter system set db_recovery_file_dest = '/opt/oracle/oradata/recovery_area' scope=spfile;
-shutdown immediate
-startup mount
-alter database archivelog;
-alter database open;
+-- alter system set db_recovery_file_dest_size = 300G;
+-- alter system set db_recovery_file_dest = '/opt/oracle/oradata/recovery_area' scope=spfile;
+-- shutdown immediate
+-- startup mount
+-- alter database archivelog;
+-- alter database open;
 -- Should now "Database log mode: Archive Mode"
 archive log list
 

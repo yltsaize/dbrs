@@ -32,6 +32,8 @@ spec:
           env:
             - name: ORACLE_PWD
               value: Passw0rd
+            - name: ENABLE_ARCHIVELOG
+              value: "true"
           volumeMounts:
           - name: src-orcl
             mountPath: /opt/oracle/oradata
