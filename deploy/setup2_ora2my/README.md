@@ -198,3 +198,11 @@ SQL> INSERT INTO C##DBZUSER.DEBEZIUM_SIGNAL (id,type,data) VALUES (CURRENT_TIMES
 
 1 row created.
 ```
+
+## Oracle ops memo
+
+List acrhive logs with their size
+
+```
+select sequence#, substr(name,-40,40) as name, blocks*block_size/1024/1024 "Size (MB)" from v$archived_log where status = 'A' and standby_dest = 'NO' and completion_time > sysdate-1 order by name;
+```
