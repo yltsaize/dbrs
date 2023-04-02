@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2023-04-02T05:13:43.975Z
+__export_date: 2023-04-02T09:08:45.642Z
 __export_source: insomnia.desktop.app:v2022.7.5
 resources:
   - _id: req_a62970cdf320426e848492dfd5595f43
@@ -173,7 +173,7 @@ resources:
     _type: request_group
   - _id: req_afb8413e5f3a4e80aa0b258857c3961f
     parentId: fld_0d9c4f8b9539463f8c8e383580b2371a
-    modified: 1680411547807
+    modified: 1680425906725
     created: 1677402730003
     url: http://dbrs-cp-kafka-connect:8080/connectors
     name: 02.020 Create TPCC src
@@ -198,7 +198,7 @@ resources:
                 "database.server.id": "20000",
         			  "snapshot.locking.mode": "none",
         				"snapshot.mode": "initial",
-        			  "schema.include.list": "c##tpcc",
+        			  "schema.include.list": "C##DBZUSER,C##TPCC",
         			  "table.include.list": "C##DBZUSER.DEBEZIUM_SIGNAL",
         			  "signal.data.collection": "ORCLCDB.C##DBZUSER.DEBEZIUM_SIGNAL",
                 "schema.history.internal.kafka.bootstrap.servers": "dbrs-cp-kafka:9092",
