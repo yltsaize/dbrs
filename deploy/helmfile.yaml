@@ -18,6 +18,11 @@ releases:
   - cp-helm-charts:
       cp-kafka-connect:
         servicePort: 8080
+    hammerdb:
+      resources:
+        requests:
+          cpu: 6
+          memory: 32Gi
 - name: ora2my
   chart: ./setup2_ora2my
   values:
