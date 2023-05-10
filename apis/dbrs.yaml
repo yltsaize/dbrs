@@ -1,21 +1,25 @@
 _type: export
 __export_format: 4
-__export_date: 2023-04-02T09:08:45.642Z
+__export_date: 2023-05-10T10:57:00.051Z
 __export_source: insomnia.desktop.app:v2022.7.5
 resources:
-  - _id: req_a62970cdf320426e848492dfd5595f43
+  - _id: req_62279a855f1242baa5c88a5892ab9055
     parentId: fld_9cce845d3739420faa70c95d5407a362
-    modified: 1676048191979
-    created: 1676047697320
-    url: http://dbrs-cp-kafka-connect:8080/connector-plugins
-    name: List connector-plugins
+    modified: 1683715830674
+    created: 1683715448836
+    url: http://dbrs-cp-kafka-connect:8080/admin/loggers/root
+    name: PUT /loggers
     description: ""
-    method: GET
-    body: {}
+    method: PUT
+    body:
+      mimeType: application/json
+      text: '{"level": "TRACE"}'
     parameters: []
-    headers: []
+    headers:
+      - name: Content-Type
+        value: application/json
     authentication: {}
-    metaSortKey: -1676047697320
+    metaSortKey: -1683715448836
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -52,6 +56,52 @@ resources:
     description: Manages DBRS connectors, topics etc.
     scope: design
     _type: workspace
+  - _id: req_fcdf1a70cea449d589e1108a151a0e38
+    parentId: fld_9cce845d3739420faa70c95d5407a362
+    modified: 1683715845673
+    created: 1683715839959
+    url: http://dbrs-cp-kafka-connect:8080/admin/loggers
+    name: GET /loggers
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: '{"level": "TRACE"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1683715268487
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a62970cdf320426e848492dfd5595f43
+    parentId: fld_9cce845d3739420faa70c95d5407a362
+    modified: 1676048191979
+    created: 1676047697320
+    url: http://dbrs-cp-kafka-connect:8080/connector-plugins
+    name: List connector-plugins
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1676047697320
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_a96f2dc08ef44b8586e9a4e55cbcfe74
     parentId: fld_9cce845d3739420faa70c95d5407a362
     modified: 1680412152217
